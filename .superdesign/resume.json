@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "targets": {
+    "/": {
+      "targetKind": "new-ui",
+      "projectId": "b7ef639a-2a3c-415d-9214-8acac20ef120",
+      "activeDraftId": "0d582d82-96a8-4767-bdb8-588a2dd04884",
+      "designSystemPath": ".superdesign/design-system.md",
+      "contextFiles": [
+        ".superdesign/design-system.md",
+        "index.html"
+      ],
+      "fingerprints": {
+        ".superdesign/design-system.md": "89a7d49a6a02ae244bf8abe94dc229d72b7d4f8ba4146c2f69e76a2bb389ac09",
+        "index.html": "95e23b8529a5fb51cb2a206bb51e68834043683ccdda3fac379a51481f1c3ad2"
+      },
+      "drafts": {
+        "0d582d82-96a8-4767-bdb8-588a2dd04884": {
+          "title": "ada@portfolio: ~/dev",
+          "visualDirection": "CRT terminal phosphor green",
+          "currentVersion": 1
+        }
+      },
+      "updatedAt": "2026-08-25T10:45:00+02:00"
+    }
+  }
+}

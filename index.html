@@ -1,0 +1,513 @@
+<!DOCTYPE html><html lang="en" class="scroll-smooth"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ada@portfolio: ~/dev</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&amp;family=IBM+Plex+Mono:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@300;400;500;600&display=swap');
+
+        :root {
+            --phosphor: #39ff7a;
+            --phosphor-dim: #2bbf5c;
+            --phosphor-faint: #1c7a3c;
+            --sage: #5f8d68;
+            --near-white: #eafff1;
+            --amber: #ffd24a;
+            --cyan: #5cf6ff;
+            --bg-black: #000000;
+            --panel-black: #050805;
+            --border-dim: #143614;
+        }
+
+        body {
+            font-family: 'JetBrains Mono', 'IBM Plex Mono', monospace;
+            background-color: var(--bg-black);
+            overflow-x: hidden;
+        }
+
+        .crt-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: repeating-linear-gradient(
+                rgba(0, 0, 0, 0) 0px,
+                rgba(0, 0, 0, 0) 2px,
+                rgba(0, 0, 0, 0.16) 3px,
+                rgba(0, 0, 0, 0) 4px
+            );
+            pointer-events: none;
+            z-index: 100;
+            mix-blend-mode: multiply;
+            opacity: 0.5;
+        }
+
+        .glow-text {
+            text-shadow: 0 0 8px rgba(57, 255, 122, 0.45), 0 0 24px rgba(57, 255, 122, 0.18);
+        }
+
+        .glow-soft {
+            text-shadow: 0 0 12px rgba(57, 255, 122, 0.25);
+        }
+
+        .glow-amber {
+            text-shadow: 0 0 10px rgba(255, 210, 74, 0.4);
+        }
+
+        .name-banner {
+            font-size: 60px !important;
+            letter-spacing: -0.05em;
+        }
+
+        .terminal-window {
+            box-shadow: 0 0 40px rgba(57, 255, 122, 0.05), inset 0 0 20px rgba(57, 255, 122, 0.02);
+        }
+
+        .cursor-blink {
+            display: inline-block;
+            width: 12px;
+            height: 24px;
+            background-color: var(--phosphor);
+            animation: blink 1.1s steps(2, start) infinite;
+            vertical-align: middle;
+        }
+
+        @keyframes blink {
+            to { opacity: 0; }
+        }
+
+        .status-dot-blink {
+            animation: dot-blink 2s ease-in-out infinite;
+        }
+
+        @keyframes dot-blink {
+            0%, 100% { opacity: 1; filter: brightness(1.2); }
+            50% { opacity: 0.5; filter: brightness(0.8); }
+        }
+
+        ::selection {
+            background: rgba(57, 255, 122, 0.3);
+            color: #fff;
+        }
+
+        .skill-bar-fill {
+            background: linear-gradient(90deg, var(--phosphor-dim), var(--phosphor));
+            box-shadow: 0 0 10px rgba(57, 255, 122, 0.4);
+        }
+
+        .project-card:hover {
+            border-color: #1f4d1f;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(57, 255, 122, 0.08);
+        }
+        
+        .radial-glow-1 {
+            background: radial-gradient(circle at top right, rgba(57, 255, 122, 0.08), transparent 40%);
+        }
+        
+        .radial-glow-2 {
+            background: radial-gradient(circle at bottom left, rgba(57, 255, 122, 0.05), transparent 40%);
+        }
+    </style>
+</head>
+<body class="m-0 p-0 text-[#5f8d68]">
+    <div class="crt-overlay" data-sd-id="1"></div>
+
+    <div class="min-h-screen relative flex flex-col items-center py-12 px-4 radial-glow-1 radial-glow-2" data-sd-id="2">
+        <!-- Main Terminal Frame -->
+        <div class="terminal-window w-full max-w-[1120px] bg-[#050805] border border-[#143614] rounded-lg overflow-hidden flex flex-col relative z-10" data-sd-id="3">
+            
+            <!-- Title Bar -->
+            <header class="bg-[#070b07] border-b border-[#143614] h-11 px-4 flex items-center justify-between shrink-0" data-sd-id="4">
+                <div class="flex items-center gap-2" data-sd-id="5">
+                    <div class="flex gap-1.5" data-sd-id="6">
+                        <div class="w-3 h-3 rounded-full bg-[#ff5f56]" data-sd-id="7"></div>
+                        <div class="w-3 h-3 rounded-full bg-[#ffbd2e]" data-sd-id="8"></div>
+                        <div class="w-3 h-3 rounded-full bg-[#27c93f]" data-sd-id="9"></div>
+                    </div>
+                    <div class="ml-4 text-xs font-medium tracking-tight" data-sd-id="10">
+                        <span class="text-[#eafff1]" data-sd-id="11">ada</span><span class="text-[#5f8d68]" data-sd-id="12">@portfolio: </span><span class="text-[#5f8d68]" data-sd-id="13">~/dev</span>
+                    </div>
+                </div>
+                
+                <nav class="flex items-center gap-6" data-sd-id="14">
+                    <div class="flex items-center gap-4 text-xs font-medium uppercase tracking-widest text-[#5f8d68]" data-sd-id="15">
+                        <a href="#work" id="nav-work" class="hover:text-[#39ff7a] hover:glow-text transition-all" data-sd-id="16">~/work</a>
+                        <a href="#stack" id="nav-stack" class="hover:text-[#39ff7a] hover:glow-text transition-all" data-sd-id="17">~/stack</a>
+                        <a href="#contact" id="nav-contact" class="hover:text-[#39ff7a] hover:glow-text transition-all" data-sd-id="18">~/contact</a>
+                    </div>
+                    <div class="h-4 w-px bg-[#143614] mx-2" data-sd-id="19"></div>
+                    <div class="flex items-center gap-2 text-[10px] text-[#ffd24a] glow-amber uppercase tracking-wider" data-sd-id="20">
+                        <span class="w-1.5 h-1.5 rounded-full bg-[#ffd24a] status-dot-blink" data-sd-id="21"></span>
+                        Available for work
+                    </div>
+                </nav>
+            </header>
+
+            <!-- Scrollable Body Content -->
+            <main class="flex-1 p-8 lg:p-12 overflow-y-auto space-y-24 scroll-smooth" data-sd-id="22">
+                
+                <!-- (1) WHOAMI HERO -->
+                <section id="hero" class="space-y-6" data-sd-id="23">
+                    <div class="flex items-center gap-3 text-sm mb-4" data-sd-id="24">
+                        <span class="text-[#5cf6ff]" data-sd-id="25">ada</span>
+                        <span class="text-[#39ff7a]" data-sd-id="26">~/dev $</span>
+                        <span class="text-[#eafff1]" data-sd-id="27">whoami --full</span>
+                    </div>
+                    
+                    <div class="relative" data-sd-id="28">
+                        <h1 class="name-banner font-extrabold text-[#eafff1] glow-text leading-tight mb-2" data-sd-id="29">ADA REYES<span class="cursor-blink ml-2" data-sd-id="30"></span></h1>
+                        <p class="text-lg md:text-xl text-[#39ff7a] glow-soft flex items-center gap-2" data-sd-id="31">
+                            <span class="text-[#5f8d68] opacity-60 font-light" data-sd-id="32">&gt;</span> Full-stack engineer &amp; indie hacker, building developer tools
+                        </p>
+                    </div>
+
+                    <div class="max-w-2xl space-y-6" data-sd-id="33">
+                        <p class="text-[#5f8d68] leading-relaxed text-lg" data-sd-id="34">
+                            Obsessed with crafting <span class="text-[#39ff7a]" data-sd-id="35">high-performance</span> DX and local-first systems. I spend my time building modular toolchains and <span class="text-[#39ff7a]" data-sd-id="36">low-latency</span> interfaces for the next generation of software creators.
+                        </p>
+                        
+                        <div class="flex flex-wrap gap-x-8 gap-y-3 text-xs font-medium uppercase tracking-wider text-[#5f8d68]" data-sd-id="37">
+                            <span class="flex items-center gap-2" data-sd-id="38"><span class="text-[#39ff7a]" data-sd-id="39">[x]</span> Location: Lisbon, Portugal (UTC)</span>
+                            <span class="flex items-center gap-2" data-sd-id="40"><span class="text-[#39ff7a]" data-sd-id="41">[x]</span> 10+ Years Shipping</span>
+                            <span class="flex items-center gap-2" data-sd-id="42"><span class="text-[#39ff7a]" data-sd-id="43">[x]</span> Available Now</span>
+                        </div>
+
+                        <div class="flex flex-wrap gap-4 pt-4" data-sd-id="44">
+                            <a href="#work" id="cta-work" class="bg-[#39ff7a] text-[#050805] px-6 py-3 font-bold text-sm tracking-tighter glow-text hover:brightness-110 transition-all flex items-center gap-2" data-sd-id="45">
+                                $ ls ~/projects -&gt;
+                            </a>
+                            <a href="#contact" id="cta-contact" class="border border-[#1c7a3c] text-[#39ff7a] px-6 py-3 font-medium text-sm tracking-tighter hover:bg-[#143614] transition-all" data-sd-id="46">
+                                ./contact --hire
+                            </a>
+                        </div>
+                    </div>
+                </section>
+
+                <div class="h-px w-full bg-gradient-to-r from-transparent via-[#143614] to-transparent" data-sd-id="47"></div>
+
+                <!-- (2) NEOFETCH IDENTITY -->
+                <section id="identity" data-sd-id="48">
+                    <div class="flex items-center gap-3 text-sm mb-10" data-sd-id="49">
+                        <span class="text-[#5cf6ff]" data-sd-id="50">ada</span>
+                        <span class="text-[#39ff7a]" data-sd-id="51">~/dev $</span>
+                        <span class="text-[#eafff1]" data-sd-id="52">neofetch</span>
+                    </div>
+
+                    <div class="flex flex-col md:flex-row gap-12 items-start" data-sd-id="53">
+                        <!-- ASCII Avatar -->
+                        <div class="w-full md:w-[230px] shrink-0" data-sd-id="54">
+                            <pre class="text-[#39ff7a] glow-soft text-[10px] leading-[1.1] font-bold" data-sd-id="55">     _nnnn_
+    dGGGGMMb
+   @p~qp~~qMb
+   M|@||@) M|
+   @,----.JM|
+  JS^\__/  qKL
+ dP        MMb
+ | b      dJP'
+ \  pq  ppVP
+  "  bb  "
+   <span class="text-xs text-[#5f8d68] opacity-80 block text-center mt-4 tracking-widest uppercase" data-sd-id="56">ada@dev</span>
+                            </pre>
+                        </div>
+
+                        <!-- System Info -->
+                        <div class="flex-1 space-y-1" data-sd-id="57">
+                            <div class="text-[#eafff1] font-bold tracking-tight mb-2" data-sd-id="58">ada@portfolio ----------</div>
+                            <div class="grid grid-cols-[100px_1fr] gap-x-4 gap-y-1 text-sm" data-sd-id="59">
+                                <span class="text-[#39ff7a] font-medium" data-sd-id="60">OS:</span> <span class="text-[#5f8d68]" data-sd-id="61">Human v10.4 (engineer build)</span>
+                                <span class="text-[#39ff7a] font-medium" data-sd-id="62">Host:</span> <span class="text-[#5f8d68]" data-sd-id="63">Remote, Lisbon PT</span>
+                                <span class="text-[#39ff7a] font-medium" data-sd-id="64">Role:</span> <span class="text-[#5f8d68]" data-sd-id="65">Full-stack + DevTools</span>
+                                <span class="text-[#39ff7a] font-medium" data-sd-id="66">Uptime:</span> <span class="text-[#5f8d68]" data-sd-id="67">10 yrs, 4 startups</span>
+                                <span class="text-[#39ff7a] font-medium" data-sd-id="68">Shell:</span> <span class="text-[#5f8d68]" data-sd-id="69">zsh, nvim, tmux</span>
+                                <span class="text-[#39ff7a] font-medium" data-sd-id="70">Stack:</span> <span class="text-[#5f8d68]" data-sd-id="71">TypeScript, Rust, Go, Postgres</span>
+                                <span class="text-[#39ff7a] font-medium" data-sd-id="72">Focus:</span> <span class="text-[#5f8d68]" data-sd-id="73">agent tooling &amp; local-first</span>
+                                <span class="text-[#39ff7a] font-medium" data-sd-id="74">Status:</span> <span class="text-[#ffd24a] glow-amber" data-sd-id="75">Available</span>
+                            </div>
+                            
+                            <!-- Color Swatches -->
+                            <div class="flex gap-1.5 mt-6" data-sd-id="76">
+                                <div class="w-6 h-3 bg-[#000000] border border-[#143614]" data-sd-id="77"></div>
+                                <div class="w-6 h-3 bg-[#1c7a3c] border border-[#143614]" data-sd-id="78"></div>
+                                <div class="w-6 h-3 bg-[#2bbf5c] border border-[#143614]" data-sd-id="79"></div>
+                                <div class="w-6 h-3 bg-[#39ff7a] border border-[#143614]" data-sd-id="80"></div>
+                                <div class="w-6 h-3 bg-[#5cf6ff] border border-[#143614]" data-sd-id="81"></div>
+                                <div class="w-6 h-3 bg-[#ffd24a] border border-[#143614]" data-sd-id="82"></div>
+                                <div class="w-6 h-3 bg-[#eafff1] border border-[#143614]" data-sd-id="83"></div>
+                                <div class="w-6 h-3 bg-[#5f8d68] border border-[#143614]" data-sd-id="84"></div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <div class="h-px w-full bg-gradient-to-r from-transparent via-[#143614] to-transparent" data-sd-id="85"></div>
+
+                <!-- (3) WORK GRID -->
+                <section id="work" class="space-y-8" data-sd-id="86">
+                    <div class="flex flex-col gap-1" data-sd-id="87">
+                        <div class="flex items-center gap-3 text-sm" data-sd-id="88">
+                            <span class="text-[#5cf6ff]" data-sd-id="89">ada</span>
+                            <span class="text-[#39ff7a]" data-sd-id="90">~/dev $</span>
+                            <span class="text-[#eafff1]" data-sd-id="91">ls -la ~/projects</span>
+                            <span class="text-[#5f8d68] opacity-60 ml-2" data-sd-id="92"># 4 selected</span>
+                        </div>
+                        <div class="flex items-center gap-3 mt-4" data-sd-id="93">
+                            <span class="text-[10px] uppercase tracking-[0.3em] text-[#39ff7a] opacity-60" data-sd-id="94">&gt; selected work</span>
+                            <h2 class="text-[#eafff1] font-bold text-lg" data-sd-id="95">Things I built and shipped <span class="text-[#1c7a3c] font-normal ml-2" data-sd-id="96">// drwxr-xr-x</span></h2>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6" data-sd-id="97">
+                        <!-- Project 1 -->
+                        <div class="project-card bg-[#050805] border border-[#143614] p-5 rounded-md transition-all group" data-sd-id="98">
+                            <div class="flex justify-between items-baseline mb-3" data-sd-id="99">
+                                <h3 class="text-[#39ff7a] font-bold tracking-tight" data-sd-id="100">portmux/</h3>
+                                <div class="flex items-center gap-3 text-[10px] font-mono" data-sd-id="101">
+                                    <span class="text-[#ffd24a] glow-amber" data-sd-id="102">★ 4.2k</span>
+                                    <span class="text-[#1c7a3c]" data-sd-id="103">-rwxr-xr-x</span>
+                                </div>
+                            </div>
+                            <p class="text-sm text-[#5f8d68] mb-4 line-clamp-2" data-sd-id="104">
+                                A <span class="text-[#39ff7a]" data-sd-id="105">distributed proxy</span> for multiplexing local dev environments across mesh networks.
+                            </p>
+                            <div class="flex flex-wrap gap-2 mb-6" data-sd-id="106">
+                                <span class="text-[9px] px-1.5 py-0.5 border border-[#ffd24a]/30 text-[#ffd24a] uppercase tracking-tighter" data-sd-id="107">Open Source</span>
+                                <span class="text-[9px] px-1.5 py-0.5 border border-[#143614] text-[#5f8d68] uppercase tracking-tighter" data-sd-id="108">Go</span>
+                                <span class="text-[9px] px-1.5 py-0.5 border border-[#143614] text-[#5f8d68] uppercase tracking-tighter" data-sd-id="109">LibP2P</span>
+                            </div>
+                            <div class="flex gap-4 text-xs font-bold uppercase tracking-widest text-[#39ff7a]" data-sd-id="110">
+                                <a href="#" id="p1-demo" class="flex items-center gap-1.5 hover:glow-text" data-sd-id="111">→ Live Demo</a>
+                                <a href="#" id="p1-source" class="flex items-center gap-1.5 hover:glow-text" data-sd-id="112">→ Source</a>
+                            </div>
+                        </div>
+
+                        <!-- Project 2 -->
+                        <div class="project-card bg-[#050805] border border-[#143614] p-5 rounded-md transition-all group" data-sd-id="113">
+                            <div class="flex justify-between items-baseline mb-3" data-sd-id="114">
+                                <h3 class="text-[#39ff7a] font-bold tracking-tight" data-sd-id="115">agentd/</h3>
+                                <div class="flex items-center gap-3 text-[10px] font-mono" data-sd-id="116">
+                                    <span class="text-[#ffd24a] glow-amber" data-sd-id="117">★ 1.8k</span>
+                                    <span class="text-[#1c7a3c]" data-sd-id="118">-rwxr-xr-x</span>
+                                </div>
+                            </div>
+                            <p class="text-sm text-[#5f8d68] mb-4 line-clamp-2" data-sd-id="119">
+                                Lightweight <span class="text-[#39ff7a]" data-sd-id="120">TS runtime</span> for long-running autonomous background agents with persistence.
+                            </p>
+                            <div class="flex flex-wrap gap-2 mb-6" data-sd-id="121">
+                                <span class="text-[9px] px-1.5 py-0.5 border border-[#ffd24a]/30 text-[#ffd24a] uppercase tracking-tighter" data-sd-id="122">SaaS</span>
+                                <span class="text-[9px] px-1.5 py-0.5 border border-[#143614] text-[#5f8d68] uppercase tracking-tighter" data-sd-id="123">Rust</span>
+                                <span class="text-[9px] px-1.5 py-0.5 border border-[#143614] text-[#5f8d68] uppercase tracking-tighter" data-sd-id="124">WASM</span>
+                            </div>
+                            <div class="flex gap-4 text-xs font-bold uppercase tracking-widest text-[#39ff7a]" data-sd-id="125">
+                                <a href="#" id="p2-demo" class="flex items-center gap-1.5 hover:glow-text" data-sd-id="126">→ Live Demo</a>
+                                <a href="#" id="p2-source" class="flex items-center gap-1.5 hover:glow-text" data-sd-id="127">→ Source</a>
+                            </div>
+                        </div>
+
+                        <!-- Project 3 -->
+                        <div class="project-card bg-[#050805] border border-[#143614] p-5 rounded-md transition-all group" data-sd-id="128">
+                            <div class="flex justify-between items-baseline mb-3" data-sd-id="129">
+                                <h3 class="text-[#39ff7a] font-bold tracking-tight" data-sd-id="130">glow-notes/</h3>
+                                <div class="flex items-center gap-3 text-[10px] font-mono" data-sd-id="131">
+                                    <span class="text-[#ffd24a] glow-amber" data-sd-id="132">★ 840</span>
+                                    <span class="text-[#1c7a3c]" data-sd-id="133">-rwxr-xr-x</span>
+                                </div>
+                            </div>
+                            <p class="text-sm text-[#5f8d68] mb-4 line-clamp-2" data-sd-id="134">
+                                A <span class="text-[#39ff7a]" data-sd-id="135">local-first</span> markdown editor with real-time CRDT sync and E2E encryption.
+                            </p>
+                            <div class="flex flex-wrap gap-2 mb-6" data-sd-id="136">
+                                <span class="text-[9px] px-1.5 py-0.5 border border-[#ffd24a]/30 text-[#ffd24a] uppercase tracking-tighter" data-sd-id="137">Open Source</span>
+                                <span class="text-[9px] px-1.5 py-0.5 border border-[#143614] text-[#5f8d68] uppercase tracking-tighter" data-sd-id="138">React</span>
+                                <span class="text-[9px] px-1.5 py-0.5 border border-[#143614] text-[#5f8d68] uppercase tracking-tighter" data-sd-id="139">Automerge</span>
+                            </div>
+                            <div class="flex gap-4 text-xs font-bold uppercase tracking-widest text-[#39ff7a]" data-sd-id="140">
+                                <a href="#" id="p3-demo" class="flex items-center gap-1.5 hover:glow-text" data-sd-id="141">→ Live Demo</a>
+                                <a href="#" id="p3-source" class="flex items-center gap-1.5 hover:glow-text" data-sd-id="142">→ Source</a>
+                            </div>
+                        </div>
+
+                        <!-- Project 4 -->
+                        <div class="project-card bg-[#050805] border border-[#143614] p-5 rounded-md transition-all group" data-sd-id="143">
+                            <div class="flex justify-between items-baseline mb-3" data-sd-id="144">
+                                <h3 class="text-[#39ff7a] font-bold tracking-tight" data-sd-id="145">phosphor-ui/</h3>
+                                <div class="flex items-center gap-3 text-[10px] font-mono" data-sd-id="146">
+                                    <span class="text-[#ffd24a] glow-amber" data-sd-id="147">★ 2.1k</span>
+                                    <span class="text-[#1c7a3c]" data-sd-id="148">-rwxr-xr-x</span>
+                                </div>
+                            </div>
+                            <p class="text-sm text-[#5f8d68] mb-4 line-clamp-2" data-sd-id="149">
+                                Headless <span class="text-[#39ff7a]" data-sd-id="150">UI primitives</span> designed for low-latency terminal-style web applications.
+                            </p>
+                            <div class="flex flex-wrap gap-2 mb-6" data-sd-id="151">
+                                <span class="text-[9px] px-1.5 py-0.5 border border-[#ffd24a]/30 text-[#ffd24a] uppercase tracking-tighter" data-sd-id="152">Open Source</span>
+                                <span class="text-[9px] px-1.5 py-0.5 border border-[#143614] text-[#5f8d68] uppercase tracking-tighter" data-sd-id="153">Tailwind</span>
+                                <span class="text-[9px] px-1.5 py-0.5 border border-[#143614] text-[#5f8d68] uppercase tracking-tighter" data-sd-id="154">Framer</span>
+                            </div>
+                            <div class="flex gap-4 text-xs font-bold uppercase tracking-widest text-[#39ff7a]" data-sd-id="155">
+                                <a href="#" id="p4-demo" class="flex items-center gap-1.5 hover:glow-text" data-sd-id="156">→ Live Demo</a>
+                                <a href="#" id="p4-source" class="flex items-center gap-1.5 hover:glow-text" data-sd-id="157">→ Source</a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <div class="h-px w-full bg-gradient-to-r from-transparent via-[#143614] to-transparent" data-sd-id="158"></div>
+
+                <!-- (4) SKILL METERS -->
+                <section id="stack" class="space-y-8" data-sd-id="159">
+                    <div class="flex flex-col gap-1" data-sd-id="160">
+                        <div class="flex items-center gap-3 text-sm" data-sd-id="161">
+                            <span class="text-[#5cf6ff]" data-sd-id="162">ada</span>
+                            <span class="text-[#39ff7a]" data-sd-id="163">~/dev $</span>
+                            <span class="text-[#eafff1]" data-sd-id="164">cat stack.txt | sort -r</span>
+                        </div>
+                        <div class="flex items-center gap-3 mt-4" data-sd-id="165">
+                            <span class="text-[10px] uppercase tracking-[0.3em] text-[#39ff7a] opacity-60" data-sd-id="166">&gt; proficiency</span>
+                            <h2 class="text-[#eafff1] font-bold text-lg" data-sd-id="167">The tools I reach for <span class="text-[#1c7a3c] font-normal ml-2" data-sd-id="168">// self-assessed, honest</span></h2>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-16 gap-y-4" data-sd-id="169">
+                        <!-- Skill 1 -->
+                        <div class="grid grid-cols-[150px_1fr_40px] items-center gap-4" data-sd-id="170">
+                            <span class="text-sm" data-sd-id="171">TypeScript</span>
+                            <div class="h-2.5 bg-[#070b07] border border-[#143614] rounded-sm relative overflow-hidden" data-sd-id="172">
+                                <div class="skill-bar-fill h-full" style="width: 95%" data-sd-id="173"></div>
+                            </div>
+                            <span class="text-xs text-[#39ff7a] text-right" data-sd-id="174">95%</span>
+                        </div>
+                        <!-- Skill 2 -->
+                        <div class="grid grid-cols-[150px_1fr_40px] items-center gap-4" data-sd-id="175">
+                            <span class="text-sm" data-sd-id="176">React/Next.js</span>
+                            <div class="h-2.5 bg-[#070b07] border border-[#143614] rounded-sm relative overflow-hidden" data-sd-id="177">
+                                <div class="skill-bar-fill h-full" style="width: 92%" data-sd-id="178"></div>
+                            </div>
+                            <span class="text-xs text-[#39ff7a] text-right" data-sd-id="179">92%</span>
+                        </div>
+                        <!-- Skill 3 -->
+                        <div class="grid grid-cols-[150px_1fr_40px] items-center gap-4" data-sd-id="180">
+                            <span class="text-sm" data-sd-id="181">Go</span>
+                            <div class="h-2.5 bg-[#070b07] border border-[#143614] rounded-sm relative overflow-hidden" data-sd-id="182">
+                                <div class="skill-bar-fill h-full" style="width: 88%" data-sd-id="183"></div>
+                            </div>
+                            <span class="text-xs text-[#39ff7a] text-right" data-sd-id="184">88%</span>
+                        </div>
+                        <!-- Skill 4 -->
+                        <div class="grid grid-cols-[150px_1fr_40px] items-center gap-4" data-sd-id="185">
+                            <span class="text-sm" data-sd-id="186">Postgres/SQL</span>
+                            <div class="h-2.5 bg-[#070b07] border border-[#143614] rounded-sm relative overflow-hidden" data-sd-id="187">
+                                <div class="skill-bar-fill h-full" style="width: 90%" data-sd-id="188"></div>
+                            </div>
+                            <span class="text-xs text-[#39ff7a] text-right" data-sd-id="189">90%</span>
+                        </div>
+                        <!-- Skill 5 -->
+                        <div class="grid grid-cols-[150px_1fr_40px] items-center gap-4" data-sd-id="190">
+                            <span class="text-sm" data-sd-id="191">Rust</span>
+                            <div class="h-2.5 bg-[#070b07] border border-[#143614] rounded-sm relative overflow-hidden" data-sd-id="192">
+                                <div class="skill-bar-fill h-full" style="width: 82%" data-sd-id="193"></div>
+                            </div>
+                            <span class="text-xs text-[#39ff7a] text-right" data-sd-id="194">82%</span>
+                        </div>
+                        <!-- Skill 6 -->
+                        <div class="grid grid-cols-[150px_1fr_40px] items-center gap-4" data-sd-id="195">
+                            <span class="text-sm" data-sd-id="196">Docker/K8s</span>
+                            <div class="h-2.5 bg-[#070b07] border border-[#143614] rounded-sm relative overflow-hidden" data-sd-id="197">
+                                <div class="skill-bar-fill h-full" style="width: 78%" data-sd-id="198"></div>
+                            </div>
+                            <span class="text-xs text-[#39ff7a] text-right" data-sd-id="199">78%</span>
+                        </div>
+                        <!-- Skill 7 -->
+                        <div class="grid grid-cols-[150px_1fr_40px] items-center gap-4" data-sd-id="200">
+                            <span class="text-sm" data-sd-id="201">System design</span>
+                            <div class="h-2.5 bg-[#070b07] border border-[#143614] rounded-sm relative overflow-hidden" data-sd-id="202">
+                                <div class="skill-bar-fill h-full" style="width: 86%" data-sd-id="203"></div>
+                            </div>
+                            <span class="text-xs text-[#39ff7a] text-right" data-sd-id="204">86%</span>
+                        </div>
+                        <!-- Skill 8 -->
+                        <div class="grid grid-cols-[150px_1fr_40px] items-center gap-4" data-sd-id="205">
+                            <span class="text-sm" data-sd-id="206">Design/UI</span>
+                            <div class="h-2.5 bg-[#070b07] border border-[#143614] rounded-sm relative overflow-hidden" data-sd-id="207">
+                                <div class="skill-bar-fill h-full" style="width: 74%" data-sd-id="208"></div>
+                            </div>
+                            <span class="text-xs text-[#39ff7a] text-right" data-sd-id="209">74%</span>
+                        </div>
+                    </div>
+                </section>
+
+                <div class="h-px w-full bg-gradient-to-r from-transparent via-[#143614] to-transparent" data-sd-id="210"></div>
+
+                <!-- (5) CONTACT CTA -->
+                <section id="contact" class="flex flex-col items-center py-12" data-sd-id="211">
+                    <div class="w-full flex items-center gap-3 text-sm mb-12" data-sd-id="212">
+                        <span class="text-[#5cf6ff]" data-sd-id="213">ada</span>
+                        <span class="text-[#39ff7a]" data-sd-id="214">~/dev $</span>
+                        <span class="text-[#eafff1]" data-sd-id="215">./contact --hire</span>
+                    </div>
+
+                    <div class="w-full bg-gradient-to-b from-[#0a120a] to-[#050805] border border-[#1f4d1f] rounded-lg p-12 text-center relative overflow-hidden group" data-sd-id="216">
+                        <!-- Background glow effect -->
+                        <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-1000 bg-[radial-gradient(circle_at_center,rgba(57,255,122,0.05)_0%,transparent_70%)]" data-sd-id="217"></div>
+                        
+                        <div class="relative z-10 space-y-6" data-sd-id="218">
+                            <h2 class="text-3xl md:text-4xl font-extrabold text-[#eafff1] glow-text tracking-tight" data-sd-id="219">
+                                Let's build <span class="text-[#39ff7a]" data-sd-id="220">something together</span>.
+                            </h2>
+                            <p class="text-[#5f8d68] max-w-lg mx-auto leading-relaxed" data-sd-id="221">
+                                I'm currently looking for new challenges in devtools, infrastructure, or local-first apps.
+                            </p>
+
+                            <div class="mt-8 mb-10 inline-flex items-center gap-3 bg-[#000000] border border-[#143614] p-4 rounded-md shadow-[inset_0_2px_10px_rgba(0,0,0,0.5)] glow-soft" data-sd-id="222">
+                                <span class="text-[#39ff7a] font-bold" data-sd-id="223">$</span>
+                                <code class="text-[#eafff1] font-mono tracking-wide">mail ada@reyes.dev</code>
+                                <span class="cursor-blink" data-sd-id="224"></span>
+                            </div>
+
+                            <div class="flex flex-wrap justify-center gap-4" data-sd-id="225">
+                                <a href="#" id="social-github" class="flex items-center gap-2 px-4 py-2 border border-[#143614] hover:border-[#39ff7a] hover:text-[#39ff7a] transition-all text-xs uppercase tracking-widest font-medium group/link" data-sd-id="226">
+                                    <span class="text-[#39ff7a] group-hover/link:translate-x-1 transition-transform" data-sd-id="227">→</span> github
+                                </a>
+                                <a href="#" id="social-x" class="flex items-center gap-2 px-4 py-2 border border-[#143614] hover:border-[#39ff7a] hover:text-[#39ff7a] transition-all text-xs uppercase tracking-widest font-medium group/link" data-sd-id="228">
+                                    <span class="text-[#39ff7a] group-hover/link:translate-x-1 transition-transform" data-sd-id="229">→</span> x.com
+                                </a>
+                                <a href="#" id="social-blog" class="flex items-center gap-2 px-4 py-2 border border-[#143614] hover:border-[#39ff7a] hover:text-[#39ff7a] transition-all text-xs uppercase tracking-widest font-medium group/link" data-sd-id="230">
+                                    <span class="text-[#39ff7a] group-hover/link:translate-x-1 transition-transform" data-sd-id="231">→</span> blog
+                                </a>
+                                <a href="#" id="social-cv" class="flex items-center gap-2 px-4 py-2 border border-[#143614] hover:border-[#39ff7a] hover:text-[#39ff7a] transition-all text-xs uppercase tracking-widest font-medium group/link" data-sd-id="232">
+                                    <span class="text-[#39ff7a] group-hover/link:translate-x-1 transition-transform" data-sd-id="233">→</span> cv.pdf
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </main>
+
+            <!-- Footer Strip -->
+            <footer class="bg-[#070b07] border-t border-[#143614] py-3 px-6 flex items-center justify-between shrink-0" data-sd-id="234">
+                <div class="text-[10px] tracking-wider flex items-center gap-2" data-sd-id="235">
+                    <span class="text-[#39ff7a] opacity-80" data-sd-id="236">$</span>
+                    <span class="text-[#5f8d68]" data-sd-id="237">echo "(c) 2026 Ada Reyes, built in the terminal, shipped fast"</span>
+                    <span class="w-1.5 h-3 bg-[#39ff7a] cursor-blink" data-sd-id="238"></span>
+                </div>
+                <div class="text-[9px] text-[#1c7a3c] tracking-widest uppercase font-medium flex items-center gap-4" data-sd-id="239">
+                    <span data-sd-id="240">last commit: 2h ago</span>
+                    <span data-sd-id="241">main@a1f9e2c</span>
+                    <span class="text-[#39ff7a]/40" data-sd-id="242">uptime 99.98%</span>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <!-- Background Layer Scripts -->
+    <script>
+        // Optional: Simple scroll reveal or terminal typing simulation could go here
+        console.log('Terminal initialized. Welcome, operator.');
+    </script>
+
+</body></html>
