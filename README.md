@@ -25,7 +25,7 @@ Une section = un bloc `<section id="…">` dans `index.html` :
 | Neofetch | `#identity` | avatar ASCII + fiche système (rôle, stack, statut) |
 | Projets | `#work` | 6 cartes : norteo, hub, skynet, nalarch, aubevent, homelab (→ homelab.scasse.com) |
 | Compétences | `#stack` | 8 barres (CI/CD, Ansible, OpenShift/K8s, Docker, ArgoCD, Linux, Observabilité, Python/Bash) |
-| Contact | `#contact` | command box → LinkedIn, pills github + linkedin |
+| Contact | `#contact` | command box → LinkedIn, pills github + linkedin + homelab + freelance (freelance.scasse.com, page Notion) |
 
 Conventions du design (détail dans `.superdesign/design-system.md`) :
 
