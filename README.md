@@ -23,7 +23,7 @@ Une section = un bloc `<section id="…">` dans `index.html` :
 |---|---|---|
 | Hero | `#hero` | bannière STEPHEN CASSE, rôle, bio, CTA |
 | Neofetch | `#identity` | avatar ASCII + fiche système (rôle, stack, statut) |
-| Projets | `#work` | 5 cartes : norteo, hub, skynet, nalarch, aubevent |
+| Projets | `#work` | 6 cartes : norteo, hub, skynet, nalarch, aubevent, homelab (→ homelab.scasse.com) |
 | Compétences | `#stack` | 8 barres (CI/CD, Ansible, OpenShift/K8s, Docker, ArgoCD, Linux, Observabilité, Python/Bash) |
 | Contact | `#contact` | command box → LinkedIn, pills github + linkedin |
 
