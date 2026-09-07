@@ -2,3 +2,4 @@
 *.log
 node_modules/
 .superdesign/init/
+__pycache__/

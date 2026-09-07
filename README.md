@@ -1,38 +1,42 @@
 # portfolio — site CV de Stephen Casse
 
-Site CV portfolio une page, **en ligne sur https://ksh2177.github.io/**.
-Design « CRT terminal phosphore vert » créé sur [superdesign.dev](https://superdesign.dev), puis
-personnalisé en français (CS Consulting, Ingénieur DevOps freelance).
+Site CV portfolio une page, **en ligne sur https://ksh2177.github.io/** (CS Consulting,
+Ingénieur DevOps freelance). Bilingue **FR / EN**, thème **clair / sombre**, CV PDF téléchargeables.
+Refondu le 08/09/2026 (fin du thème « CRT terminal » Superdesign).
 
 ## Structure
 
 ```
-index.html                      # tout le site : une seule page autonome
-.superdesign/design-system.md   # le design system CRT (palette, typo, effets, composants)
-.superdesign/resume.json        # état de reprise Superdesign (projectId + draftId du canvas)
+build/content.py     # LE contenu (FR + EN) : pitch, faits clés, expériences, projets, compétences…
+build/site.py        # génère index.html (deux langues + deux thèmes dans le même fichier)
+build/cv.py          # génère cv-stephen-casse-<fr|en>.pdf (2 pages A4, Chromium headless)
+build/build.sh       # régénère tout
+build/assets/        # logos sources (clair GTA VI, sombre Indigo, bandeau CV)
+index.html           # GÉNÉRÉ — ne pas éditer à la main
+assets/              # GÉNÉRÉ — logos servis par le site
+cv-stephen-casse-fr.pdf, cv-stephen-casse-en.pdf   # GÉNÉRÉS
 ```
 
-`index.html` n'a **aucun build** : Tailwind via CDN, polices Google Fonts (JetBrains Mono +
-IBM Plex Mono). L'ouvrir directement dans un navigateur suffit pour prévisualiser.
+Aucun build côté GitHub Pages : le HTML généré est commité. Dépendances locales : `python3`,
+`chromium` (pour les PDF). Polices Google Fonts (Space Grotesk + JetBrains Mono).
 
-## Contenu (repères pour éditer)
+## Modifier le contenu
 
-Une section = un bloc `<section id="…">` dans `index.html` :
+1. Éditer `build/content.py` (une mission, une compétence, un projet — dans les deux langues).
+2. `./build/build.sh`
+3. Vérifier `index.html` dans un navigateur (sélecteurs FR/EN et clair/sombre en haut à droite,
+   mémorisés en localStorage ; par défaut = langue du navigateur et `prefers-color-scheme`).
+4. Commit + push (ci-dessous).
 
-| Section | id | Contenu |
-|---|---|---|
-| Hero | `#hero` | bannière STEPHEN CASSE, rôle, bio, CTA |
-| Neofetch | `#identity` | avatar ASCII + fiche système (rôle, stack, statut) |
-| Projets | `#work` | 6 cartes : norteo, hub, skynet, nalarch, aubevent, homelab (→ homelab.scasse.com) |
-| Compétences | `#stack` | 8 barres (CI/CD, Ansible, OpenShift/K8s, Docker, ArgoCD, Linux, Observabilité, Python/Bash) |
-| Contact | `#contact` | command box → LinkedIn, pills github + linkedin + homelab + notion (freelance.scasse.com, page Notion) |
+## Identité visuelle
 
-Conventions du design (détail dans `.superdesign/design-system.md`) :
-
-- prompt du terminal : `ksh2177 ~/devops $` ;
-- l'**ambre** (`#ffd24a`) est réservé au statut et aux tags — jamais pour les titres ;
-- pas d'emoji, pas de photos, brackets ASCII `[x]` au lieu de checkmarks ;
-- les liens morts sont interdits : un projet privé affiche `// code privé` au lieu d'un lien.
+- Palette CS Consulting : bleu nuit `#373643`, vert `#18cb96`, rouge `#ff4b4b` (CV).
+- Site clair = graine **GTA VI** (palette matugen du thème 6 du bureau Skynet) ; site sombre =
+  identité **Indigo** `#8b93f8`. Quatre couleurs dominantes de la graine en rotation sur les accents.
+- Logo : les lettres gardent leur couleur d'origine, seuls le carré et le trait prennent les
+  accents du thème (`build/assets/logo-light.png`, `logo-dark.png`).
+- Conventions conservées : pas d'emoji, pas de photo, un projet privé affiche `// code privé`
+  au lieu d'un lien mort, pas de valeur décorative codée en dur (uptime, commit…).
 
 ## Publication
 
@@ -42,36 +46,14 @@ Deux remotes :
 - `github` → repo public [`ksh2177/ksh2177.github.io`](https://github.com/ksh2177/ksh2177.github.io),
   servi par **GitHub Pages** (branche `main`, racine, HTTPS forcé).
 
-Déployer une modification :
-
 ```bash
 git push origin && git push github   # Pages redéploie en ~1 min
 ```
 
-Vérifier : `curl -s https://ksh2177.github.io/ | grep '<title>'` (penser au Ctrl+Shift+R côté navigateur).
+Vérifier : `curl -s https://ksh2177.github.io/ | grep '<title>'` (Ctrl+Shift+R côté navigateur).
 
-## Itérer sur le design (Superdesign)
+## Backlog
 
-Le draft d'origine reste lié via `.superdesign/resume.json`. Pour une évolution **visuelle**
-(pas un simple changement de texte), passer par le canvas :
-
-```bash
-npx --yes @superdesign/cli@latest                # preflight (vérifie l'auth)
-npx --yes @superdesign/cli@latest iterate-design-draft \
-  --draft-id 0d582d82-96a8-4767-bdb8-588a2dd04884 \
-  -p "<direction souhaitée>" --mode replace      # branch = pour comparer des variantes
-npx --yes @superdesign/cli@latest get-design \
-  --draft-id 0d582d82-96a8-4767-bdb8-588a2dd04884 --output index.html
-```
-
-⚠️ `get-design --output` **écrase** `index.html`, y compris la personnalisation du contenu :
-itérer sur le canvas d'abord, récupérer ensuite, puis re-personnaliser (ou porter les changements
-à la main). Le skill agent est installé dans `~/.claude/skills/superdesign/`.
-
-## Évolutions envisagées (backlog)
-
-- [ ] `cv.pdf` téléchargeable (re-ajouter la pill « cv.pdf » du design d'origine) ;
-- [ ] domaine perso (ex. `cs-consulting.fr`) pointé sur GitHub Pages (CNAME) ;
-- [ ] responsive mobile à vérifier finement (nav du terminal sur petit écran) ;
-- [ ] éventuelle version anglaise ;
-- [ ] variantes visuelles via le canvas Superdesign (mode branch).
+- [ ] domaine perso pointé sur GitHub Pages (CNAME) ;
+- [ ] remplacer la page Notion (supprimée) par un vrai formulaire de contact si besoin ;
+- [ ] mettre à jour homelab.scasse.com (décrit l'infra 2025 Raspberry Pi, pas le NUC 2026).

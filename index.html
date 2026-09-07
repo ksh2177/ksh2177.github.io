@@ -1,554 +1,223 @@
-<!DOCTYPE html><html lang="fr" class="scroll-smooth"><head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ksh2177@cs-consulting: ~/devops</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&amp;family=IBM+Plex+Mono:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@300;400;500;600&display=swap');
-
-        :root {
-            --phosphor: #39ff7a;
-            --phosphor-dim: #2bbf5c;
-            --phosphor-faint: #1c7a3c;
-            --sage: #5f8d68;
-            --near-white: #eafff1;
-            --amber: #ffd24a;
-            --cyan: #5cf6ff;
-            --bg-black: #000000;
-            --panel-black: #050805;
-            --border-dim: #143614;
-        }
-
-        body {
-            font-family: 'JetBrains Mono', 'IBM Plex Mono', monospace;
-            background-color: var(--bg-black);
-            overflow-x: hidden;
-        }
-
-        .crt-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: repeating-linear-gradient(
-                rgba(0, 0, 0, 0) 0px,
-                rgba(0, 0, 0, 0) 2px,
-                rgba(0, 0, 0, 0.16) 3px,
-                rgba(0, 0, 0, 0) 4px
-            );
-            pointer-events: none;
-            z-index: 100;
-            mix-blend-mode: multiply;
-            opacity: 0.5;
-        }
-
-        .glow-text {
-            text-shadow: 0 0 8px rgba(57, 255, 122, 0.45), 0 0 24px rgba(57, 255, 122, 0.18);
-        }
-
-        .glow-soft {
-            text-shadow: 0 0 12px rgba(57, 255, 122, 0.25);
-        }
-
-        .glow-amber {
-            text-shadow: 0 0 10px rgba(255, 210, 74, 0.4);
-        }
-
-        .name-banner {
-            font-size: 60px !important;
-            letter-spacing: -0.05em;
-        }
-
-        .terminal-window {
-            box-shadow: 0 0 40px rgba(57, 255, 122, 0.05), inset 0 0 20px rgba(57, 255, 122, 0.02);
-        }
-
-        .cursor-blink {
-            display: inline-block;
-            width: 12px;
-            height: 24px;
-            background-color: var(--phosphor);
-            animation: blink 1.1s steps(2, start) infinite;
-            vertical-align: middle;
-        }
-
-        @keyframes blink {
-            to { opacity: 0; }
-        }
-
-        .status-dot-blink {
-            animation: dot-blink 2s ease-in-out infinite;
-        }
-
-        @keyframes dot-blink {
-            0%, 100% { opacity: 1; filter: brightness(1.2); }
-            50% { opacity: 0.5; filter: brightness(0.8); }
-        }
-
-        ::selection {
-            background: rgba(57, 255, 122, 0.3);
-            color: #fff;
-        }
-
-        .skill-bar-fill {
-            background: linear-gradient(90deg, var(--phosphor-dim), var(--phosphor));
-            box-shadow: 0 0 10px rgba(57, 255, 122, 0.4);
-        }
-
-        .project-card:hover {
-            border-color: #1f4d1f;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 20px rgba(57, 255, 122, 0.08);
-        }
-        
-        .radial-glow-1 {
-            background: radial-gradient(circle at top right, rgba(57, 255, 122, 0.08), transparent 40%);
-        }
-        
-        .radial-glow-2 {
-            background: radial-gradient(circle at bottom left, rgba(57, 255, 122, 0.05), transparent 40%);
-        }
-    </style>
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Stephen Casse — Ingénieur DevOps freelance · CS Consulting</title>
+<meta name="description" content="Stephen Casse, ingénieur DevOps freelance (CS Consulting) : CI/CD, Ansible, Kubernetes, GitOps. Dix ans en production bancaire. Freelance DevOps engineer, Paris / remote.">
+<meta property="og:title" content="Stephen Casse — Ingénieur DevOps freelance">
+<meta property="og:description" content="Automatisons votre delivery. CI/CD, Ansible, Kubernetes, GitOps — dix ans en production bancaire.">
+<meta property="og:image" content="https://ksh2177.github.io/assets/logo-light.png">
+<link rel="icon" href="assets/logo-light.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+:root {
+  --bg: #fdf7ff;
+  --low: #f7f2f9;
+  --card: #ffffff;
+  --text: #1c1b20;
+  --muted: #484550;
+  --primary: #6866A7;
+  --on_primary: #ffffff;
+  --outline: #cac4d2;
+  --chip: #f2ecf3;
+  --chip_fg: #484550;
+  --mono: #7a68b4;
+  --hero: linear-gradient(135deg, #f7f2f9 0%, #ece0f2 55%, #f9e3ee 100%);
+  --k0: #6866A7;
+  --kb0: #6866A7;
+  --k1: #9775BA;
+  --kb1: #9775BA;
+  --k2: #A86F9F;
+  --kb2: #C898C2;
+  --k3: #655164;
+  --kb3: #655164;
+}
+:root[data-theme="dark"] {
+  --bg: #131319;
+  --low: #1b1b21;
+  --card: #1f1f25;
+  --text: #e4e1ea;
+  --muted: #c1c3f0;
+  --primary: #8b93f8;
+  --on_primary: #000141;
+  --outline: #464652;
+  --chip: #292930;
+  --chip_fg: #e4e1ea;
+  --mono: #8b93f8;
+  --hero: linear-gradient(135deg, #131319 0%, #1b1b2b 60%, #1f1f25 100%);
+  --k0: #8b93f8;
+  --kb0: #8b93f8;
+  --k1: #6fd3a6;
+  --kb1: #6fd3a6;
+  --k2: #e2b25f;
+  --kb2: #e2b25f;
+  --k3: #C793E0;
+  --kb3: #C793E0;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #131319;
+  --low: #1b1b21;
+  --card: #1f1f25;
+  --text: #e4e1ea;
+  --muted: #c1c3f0;
+  --primary: #8b93f8;
+  --on_primary: #000141;
+  --outline: #464652;
+  --chip: #292930;
+  --chip_fg: #e4e1ea;
+  --mono: #8b93f8;
+  --hero: linear-gradient(135deg, #131319 0%, #1b1b2b 60%, #1f1f25 100%);
+  --k0: #8b93f8;
+  --kb0: #8b93f8;
+  --k1: #6fd3a6;
+  --kb1: #6fd3a6;
+  --k2: #e2b25f;
+  --kb2: #e2b25f;
+  --k3: #C793E0;
+  --kb3: #C793E0;
+} }
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--bg); color: var(--text); font-family: 'Space Grotesk', 'Segoe UI', system-ui, sans-serif; font-size: 16px; line-height: 1.55; }
+a { color: var(--primary); text-decoration: none; } a:hover { color: var(--k1); }
+b { font-weight: 700; }
+.mono { font-family: 'JetBrains Mono', ui-monospace, monospace; }
+.wrap { max-width: 1200px; margin: 0 auto; padding: 0 32px; }
+[data-lang] { display: none; } html[lang="fr"] [data-lang="fr"], html[lang="en"] [data-lang="en"] { display: revert; }
+.logo-light, .logo-dark { height: 46px; width: auto; display: none; }
+:root[data-theme="light"] .logo-light, :root:not([data-theme]) .logo-light { display: block; }
+:root[data-theme="dark"] .logo-dark { display: block; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme]) .logo-light { display: none; } :root:not([data-theme]) .logo-dark { display: block; } }
+nav { border-bottom: 1px solid var(--outline); position: sticky; top: 0; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(10px); z-index: 5; }
+nav .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-top: 14px; padding-bottom: 14px; }
+nav .brand { display: flex; align-items: center; gap: 12px; } nav .brand span { font-size: 13px; color: var(--muted); }
+nav .menu { display: flex; align-items: center; gap: 22px; font-weight: 600; font-size: 14px; flex-wrap: wrap; justify-content: flex-end; }
+nav .menu a { color: var(--text); } nav .menu a:hover { color: var(--primary); }
+.pill { display: inline-flex; align-items: center; gap: 6px; padding: 5px 9px; border: 1px solid var(--outline); border-radius: 7px; background: transparent; color: var(--muted); cursor: pointer; font: inherit; font-size: 12px; }
+.pill svg { height: 14px; width: 14px; }
+.pill b { color: var(--primary); } .pill:hover { border-color: var(--primary); }
+.hero { background: var(--hero); padding: 64px 0 52px 0; }
+.hero .wrap { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 56px; align-items: center; }
+.hero h1 { font-size: clamp(34px, 5vw, 54px); font-weight: 700; line-height: 1.04; letter-spacing: -0.02em; margin: 14px 0 20px 0; }
+.hero h1 span { color: var(--primary); display: block; }
+.hero p { font-size: 18px; color: var(--muted); max-width: 620px; margin: 0 0 22px 0; }
+.cta { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 20px; }
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 20px; border-radius: 8px; font-weight: 600; font-size: 14px; border: 1px solid var(--primary); background: var(--primary); color: var(--on_primary); }
+.btn.ghost { background: transparent; color: var(--text); border-color: var(--outline); } .btn:hover { filter: brightness(1.08); color: var(--on_primary); } .btn.ghost:hover { color: var(--text); border-color: var(--primary); }
+.avail { display: flex; align-items: center; gap: 10px; font-size: 12px; color: var(--muted); }
+.avail i { width: 8px; height: 8px; border-radius: 50%; background: var(--k1); display: block; }
+.facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.fact { padding: 18px 20px; border-radius: 12px; background: var(--card); border: 1px solid var(--outline); display: flex; flex-direction: column; gap: 4px; }
+.fact b { font-size: 26px; font-weight: 600; } .fact span { font-size: 13px; color: var(--muted); }
+section { padding: 56px 0; } section.alt { background: var(--low); }
+h2 { font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--mono); margin: 0 0 22px 0; }
+.xp { display: grid; grid-template-columns: 210px minmax(0, 1fr); gap: 24px; padding: 22px 0; border-top: 1px solid var(--outline); }
+.xp .when { font-size: 12px; line-height: 1.6; white-space: nowrap; } .xp .when i { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 8px; }
+.xp .when small { display: block; color: var(--muted); }
+.xp h3 { font-size: 20px; margin: 0 0 4px 0; } .xp .role { font-size: 14px; font-weight: 600; color: var(--primary); margin-bottom: 6px; } .xp p { margin: 0; font-size: 14.5px; color: var(--muted); }
+.more { padding: 16px 0 0 234px; font-size: 13px; color: var(--muted); }
+.grid3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.card { display: flex; flex-direction: column; gap: 8px; padding: 22px; border-radius: 12px; background: var(--card); border: 1px solid var(--outline); border-top-width: 3px; }
+.card h3 { font-size: 17px; margin: 0; } .card .stack { font-size: 11px; color: var(--mono); } .card p { margin: 0; font-size: 13.5px; color: var(--muted); flex: 1; } .card .lnk { font-size: 11px; } .card .priv { font-size: 11px; color: var(--muted); }
+.grid2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 26px 40px; }
+.sk h3 { font-size: 14px; margin: 0 0 10px 0; display: flex; align-items: center; gap: 8px; } .sk h3 i { width: 10px; height: 10px; border-radius: 3px; display: block; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; } .tag { font-size: 12px; padding: 5px 10px; border-radius: 6px; background: var(--chip); color: var(--chip_fg); }
+.contact { background: var(--card); border-top: 1px solid var(--outline); }
+.contact .wrap { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 40px; align-items: center; }
+.contact .big { font-size: 28px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 14px; }
+.links { display: flex; flex-wrap: wrap; gap: 10px 22px; font-size: 14px; color: var(--muted); margin-bottom: 18px; } .links span { display: inline-flex; align-items: center; gap: 6px; }
+.contact img { width: 120px; height: auto; }
+footer { border-top: 1px solid var(--outline); } footer .wrap { display: flex; justify-content: space-between; gap: 12px; padding-top: 18px; padding-bottom: 18px; font-size: 11.5px; color: var(--muted); flex-wrap: wrap; }
+@media (max-width: 900px) {
+  .hero .wrap, .contact .wrap { grid-template-columns: 1fr; } .grid3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .xp { grid-template-columns: 1fr; gap: 8px; } .more { padding-left: 0; }
+}
+@media (max-width: 600px) {
+  .wrap { padding: 0 18px; } .grid3, .grid2, .facts { grid-template-columns: 1fr; } nav .brand span { display: none; }
+  nav .menu a { display: none; } .hero { padding: 40px 0 36px 0; } .contact img { display: none; }
+}
+</style>
+<script>(function(){try{var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);var l=localStorage.getItem('lang')||(navigator.language||'fr').slice(0,2);document.documentElement.setAttribute('lang',l==='en'?'en':'fr');}catch(e){}})();</script>
 </head>
-<body class="m-0 p-0 text-[#5f8d68]">
-    <div class="crt-overlay" data-sd-id="1"></div>
+<body>
+<nav><div class="wrap">
+  <a class="brand" href="#"><img class="logo-light" src="assets/logo-light.png" alt="CS Consulting"><img class="logo-dark" src="assets/logo-dark.png" alt="CS Consulting"><span class="mono">ksh2177@cs-consulting:~$</span></a>
+  <div class="menu"><a href="#xp" data-lang="fr">Expériences</a><a href="#xp" data-lang="en">Experience</a><a href="#projects" data-lang="fr">Projets</a><a href="#projects" data-lang="en">Projects</a><a href="#skills" data-lang="fr">Compétences</a><a href="#skills" data-lang="en">Skills</a><a href="#contact" data-lang="fr">Contact</a><a href="#contact" data-lang="en">Contact</a>
+    <span class="pill mono" role="group" aria-label="Langue"><button class="pill" data-set-lang="fr" style="border: 0; padding: 0;"><b data-lang="fr">FR</b><span data-lang="en">FR</span></button>·<button class="pill" data-set-lang="en" style="border: 0; padding: 0;"><span data-lang="fr">EN</span><b data-lang="en">EN</b></button></span>
+    <button class="pill" data-toggle-theme title="Basculer clair / sombre / Toggle light / dark" aria-label="Thème"><svg class="logo-light" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><svg class="logo-dark" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+  </div>
+</div></nav>
 
-    <div class="min-h-screen relative flex flex-col items-center py-12 px-4 radial-glow-1 radial-glow-2" data-sd-id="2">
-        <!-- Main Terminal Frame -->
-        <div class="terminal-window w-full max-w-[1120px] bg-[#050805] border border-[#143614] rounded-lg overflow-hidden flex flex-col relative z-10" data-sd-id="3">
-            
-            <!-- Title Bar -->
-            <header class="bg-[#070b07] border-b border-[#143614] h-11 px-4 flex items-center justify-between shrink-0" data-sd-id="4">
-                <div class="flex items-center gap-2" data-sd-id="5">
-                    <div class="flex gap-1.5" data-sd-id="6">
-                        <div class="w-3 h-3 rounded-full bg-[#ff5f56]" data-sd-id="7"></div>
-                        <div class="w-3 h-3 rounded-full bg-[#ffbd2e]" data-sd-id="8"></div>
-                        <div class="w-3 h-3 rounded-full bg-[#27c93f]" data-sd-id="9"></div>
-                    </div>
-                    <div class="ml-4 text-xs font-medium tracking-tight" data-sd-id="10">
-                        <span class="text-[#eafff1]" data-sd-id="11">ksh2177</span><span class="text-[#5f8d68]" data-sd-id="12">@cs-consulting: </span><span class="text-[#5f8d68]" data-sd-id="13">~/devops</span>
-                    </div>
-                </div>
-                
-                <nav class="flex items-center gap-6" data-sd-id="14">
-                    <div class="flex items-center gap-4 text-xs font-medium uppercase tracking-widest text-[#5f8d68]" data-sd-id="15">
-                        <a href="#work" id="nav-work" class="hover:text-[#39ff7a] hover:glow-text transition-all" data-sd-id="16">~/work</a>
-                        <a href="#stack" id="nav-stack" class="hover:text-[#39ff7a] hover:glow-text transition-all" data-sd-id="17">~/stack</a>
-                        <a href="#contact" id="nav-contact" class="hover:text-[#39ff7a] hover:glow-text transition-all" data-sd-id="18">~/contact</a>
-                    </div>
-                    <div class="h-4 w-px bg-[#143614] mx-2" data-sd-id="19"></div>
-                    <div class="flex items-center gap-2 text-[10px] text-[#ffd24a] glow-amber uppercase tracking-wider" data-sd-id="20">
-                        <span class="w-1.5 h-1.5 rounded-full bg-[#ffd24a] status-dot-blink" data-sd-id="21"></span>
-                        Disponible pour mission
-                    </div>
-                </nav>
-            </header>
+<div data-lang="fr">
+<header class="hero"><div class="wrap">
+  <div>
+    <div class="mono" style="font-size: 13px; color: var(--mono);">$ whoami</div>
+    <h1>Stephen Casse<span>Ingénieur DevOps Freelance</span></h1>
+    <p>Dix ans en production bancaire (Amundi, BPCE). J'industrialise les déploiements, j'automatise les chaînes CI/CD et je livre des environnements portables, documentés et sécurisés — du commit à la prod, sans clic manuel.</p>
+    <div class="cta"><a class="btn" href="cv-stephen-casse-fr.pdf" download>Télécharger le CV (PDF)</a><a class="btn ghost" href="#contact">Me contacter</a></div>
+    <div class="avail mono"><i></i>disponible pour mission · Île-de-France · Remote</div>
+  </div>
+  <div class="facts"><div class="fact"><b style="color: var(--k0);">10 ans</b><span>production bancaire & finance</span></div><div class="fact"><b style="color: var(--k1);">4 clients</b><span>Amundi, BPCE IT, BPCE Lease, Euler Hermes</span></div><div class="fact"><b style="color: var(--k2);">1 standard</b><span>stack Apache adoptée en prod groupe</span></div><div class="fact"><b style="color: var(--k3);">9 apps</b><span>GitOps sur mon cluster K3s</span></div></div>
+</div></header>
+<section id="xp"><div class="wrap"><h2 class="mono">// expériences</h2><div class="xp"><div class="when mono" style="color: var(--k0);"><i style="background: var(--kb0);"></i>nov. 2024 → aujourd'hui<small>Paris · hybride</small></div><div><h3>BPCE IT — BPCE Financement</h3><div class="role">Ingénieur DevOps Build & Intégration</div><p>Stack Apache HTTPD <b>portable</b> compilée sur RHEL 6 → 9.5, packaging sans dépendance système, SSL/LDAP sans privilège root — <b>adoptée comme standard de production</b>.</p></div></div><div class="xp"><div class="when mono" style="color: var(--k1);"><i style="background: var(--kb1);"></i>janv. 2022 → déc. 2024<small>Paris · hybride</small></div><div><h3>Amundi Technologies</h3><div class="role">Ingénieur DevOps — référent applicatif, lead technique adjoint</div><p>Automatisation de la bascule des clusters applicatifs et bases : <b>80 % de temps gagné</b> lors des PSI, risque d'erreur humaine quasi supprimé.</p></div></div><div class="xp"><div class="when mono" style="color: var(--k2);"><i style="background: var(--kb2);"></i>déc. 2020 → déc. 2021<small>Paris · hybride</small></div><div><h3>BPCE Lease</h3><div class="role">Lead technique cloud & ingénieur de production</div><p>Migration PowerBI → Azure de A à Z : sizing, réseau, sécurité, droits, gateway, ODBC ; <b>livrée sans encadrement</b> et documentée (technique, fonctionnel, coûts).</p></div></div><div class="more">Amundi (2018 → 2020, analyste d'exploitation) · Euler Hermes (2015 → 2017, technicien d'exploitation & datacenter) — détail dans le CV.</div></div></section>
+<section id="projects" class="alt"><div class="wrap"><h2 class="mono">// projets</h2><div class="grid3"><div class="card" style="border-top-color: var(--kb0);"><h3>Homelab K3s 100 % GitOps</h3><div class="stack mono">homelab.scasse.com</div><p>3 Raspberry Pi 4, K3s 1.29, MetalLB, Longhorn, cert-manager, Sealed Secrets, Argo CD App-of-Apps (9 apps), 3 playbooks Ansible, doc Hugo déployée par GitLab CI.</p><a class="lnk mono" href="https://homelab.scasse.com" target="_blank" rel="noopener">→ homelab.scasse.com</a></div><div class="card" style="border-top-color: var(--kb1);"><h3>Hub — plateforme mutualisée</h3><div class="stack mono">NUC XCP-ng</div><p>Gitea, Infisical, Authentik, observabilité OpenTelemetry → VictoriaMetrics → Grafana, CI Gitea Actions avec porte SonarQube.</p><span class="priv mono">// code privé</span></div><div class="card" style="border-top-color: var(--kb2);"><h3>Skynet — cockpit IA local-first</h3><div class="stack mono">Claude · MCP</div><p>Assistant personnel piloté par Claude : mémoire sémantique, outils MCP, supervision du parc, voix ; déploiement continu sur VM.</p><span class="priv mono">// code privé</span></div><div class="card" style="border-top-color: var(--kb3);"><h3>nalarch — open source</h3><div class="stack mono">Rust · MIT</div><p>Gestionnaire de paquets TUI pour Arch Linux ; rien ne s'exécute sans écran d'approbation.</p><a class="lnk mono" href="https://github.com/ksh2177/nalarch" target="_blank" rel="noopener">→ github.com/ksh2177/nalarch</a></div><div class="card" style="border-top-color: var(--kb0);"><h3>Norteo — GMAO SaaS</h3><div class="stack mono">React · Express · Prisma</div><p>Multi-instance white-label ; CI/CD Gitea Actions, déploiement Blue-Green, qualité SonarQube.</p><span class="priv mono">// code privé</span></div></div></div></section>
+<section id="skills"><div class="wrap"><h2 class="mono">// compétences</h2><div class="grid2"><div class="sk"><h3><i style="background: var(--kb0);"></i>Automatisation & CI/CD</h3><div class="tags"><span class="tag mono">Ansible</span><span class="tag mono">Ansible Automation Platform 2</span><span class="tag mono">AWX</span><span class="tag mono">Jenkins</span><span class="tag mono">GitLab CI</span><span class="tag mono">Bitbucket</span><span class="tag mono">Artifactory</span><span class="tag mono">XL Deploy / XL Release</span><span class="tag mono">ArgoCD</span><span class="tag mono">Helm</span><span class="tag mono">Kustomize</span></div></div><div class="sk"><h3><i style="background: var(--kb1);"></i>Conteneurs & orchestration</h3><div class="tags"><span class="tag mono">Docker</span><span class="tag mono">Kubernetes</span><span class="tag mono">K3s</span><span class="tag mono">OpenShift</span><span class="tag mono">Longhorn</span><span class="tag mono">MetalLB</span><span class="tag mono">ingress-nginx</span><span class="tag mono">cert-manager</span><span class="tag mono">Sealed Secrets</span></div></div><div class="sk"><h3><i style="background: var(--kb2);"></i>Cloud & IaC</h3><div class="tags"><span class="tag mono">Azure et Terraform (migration BPCE Lease 2021)</span><span class="tag mono">XCP-ng</span><span class="tag mono">vSphere</span><span class="tag mono">Docker Compose</span></div></div><div class="sk"><h3><i style="background: var(--kb3);"></i>Systèmes</h3><div class="tags"><span class="tag mono">Red Hat (RHEL 6 → 9.5)</span><span class="tag mono">SUSE</span><span class="tag mono">Debian/Arch</span><span class="tag mono">AIX</span><span class="tag mono">Solaris</span><span class="tag mono">Windows Server</span><span class="tag mono">Apache HTTPD</span><span class="tag mono">JBoss</span><span class="tag mono">Nginx</span></div></div><div class="sk"><h3><i style="background: var(--kb0);"></i>Observabilité</h3><div class="tags"><span class="tag mono">Prometheus</span><span class="tag mono">Grafana</span><span class="tag mono">Loki</span><span class="tag mono">OpenTelemetry</span><span class="tag mono">VictoriaMetrics</span><span class="tag mono">Centreon</span><span class="tag mono">Zabbix</span><span class="tag mono">AppDynamics</span><span class="tag mono">Splunk</span></div></div><div class="sk"><h3><i style="background: var(--kb1);"></i>Sécurité</h3><div class="tags"><span class="tag mono">SSL/TLS</span><span class="tag mono">OpenSSL</span><span class="tag mono">keystores JKS</span><span class="tag mono">Venafi</span><span class="tag mono">LDAP</span><span class="tag mono">Infisical</span><span class="tag mono">Authentik</span><span class="tag mono">durcissement Linux</span></div></div><div class="sk"><h3><i style="background: var(--kb2);"></i>Langages</h3><div class="tags"><span class="tag mono">Bash</span><span class="tag mono">Python</span><span class="tag mono">jq</span><span class="tag mono">YAML</span><span class="tag mono">Jinja2</span><span class="tag mono">JSON</span><span class="tag mono">Rust (notions)</span><span class="tag mono">C</span></div></div><div class="sk"><h3><i style="background: var(--kb3);"></i>Méthodes</h3><div class="tags"><span class="tag mono">Run & astreintes 24/7</span><span class="tag mono">ITIL</span><span class="tag mono">Agile</span><span class="tag mono">documentation</span><span class="tag mono">formation d'équipes</span></div></div></div></div></section>
+<section id="contact" class="contact"><div class="wrap">
+  <div><h2 class="mono">// contact</h2><div class="big">Automatisons votre delivery.</div>
+    <div class="links"><span style="color: var(--k0);"><svg class="" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 5h18v14H3z"/><path d="M3 6l9 7 9-7"/></svg><a href="mailto:contact@scasse.com">contact@scasse.com</a></span>
+      <span style="color: var(--k1);"><svg class="" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1.5 1.5"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg><a href="https://linkedin.com/in/stephen-casse" target="_blank" rel="noopener">linkedin.com/in/stephen-casse</a></span>
+      <span style="color: var(--k2);"><svg class="" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="6" r="2.5"/><circle cx="6" cy="18" r="2.5"/><circle cx="18" cy="8" r="2.5"/><path d="M6 8.5v7M18 10.5a6 6 0 0 1-6 6H8.5"/></svg><a href="https://github.com/ksh2177" target="_blank" rel="noopener">github.com/ksh2177</a></span>
+      <span style="color: var(--k3);"><svg class="" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg><a href="https://homelab.scasse.com" target="_blank" rel="noopener">homelab.scasse.com</a></span></div>
+    <div class="cta"><a class="btn" href="cv-stephen-casse-fr.pdf" download>CV français (PDF)</a><a class="btn ghost" href="cv-stephen-casse-en.pdf" download>English résumé (PDF)</a></div>
+  </div>
+  <div><img class="logo-light" src="assets/logo-light.png" alt="CS Consulting" style="height: auto;"><img class="logo-dark" src="assets/logo-dark.png" alt="CS Consulting" style="height: auto;"></div>
+</div></section>
+<footer><div class="wrap mono"><span>© 2026 Stephen Casse — CS Consulting</span><span>construit en HTML statique · GitHub Pages</span></div></footer>
+</div>
 
-            <!-- Scrollable Body Content -->
-            <main class="flex-1 p-8 lg:p-12 overflow-y-auto space-y-24 scroll-smooth" data-sd-id="22">
-                
-                <!-- (1) WHOAMI HERO -->
-                <section id="hero" class="space-y-6" data-sd-id="23">
-                    <div class="flex items-center gap-3 text-sm mb-4" data-sd-id="24">
-                        <span class="text-[#5cf6ff]" data-sd-id="25">ksh2177</span>
-                        <span class="text-[#39ff7a]" data-sd-id="26">~/devops $</span>
-                        <span class="text-[#eafff1]" data-sd-id="27">whoami --full</span>
-                    </div>
-                    
-                    <div class="relative" data-sd-id="28">
-                        <h1 class="name-banner font-extrabold text-[#eafff1] glow-text leading-tight mb-2" data-sd-id="29">STEPHEN CASSE<span class="cursor-blink ml-2" data-sd-id="30"></span></h1>
-                        <p class="text-lg md:text-xl text-[#39ff7a] glow-soft flex items-center gap-2" data-sd-id="31">
-                            <span class="text-[#5f8d68] opacity-60 font-light" data-sd-id="32">&gt;</span> Ingénieur DevOps freelance — automatisation &amp; intégration
-                        </p>
-                    </div>
-
-                    <div class="max-w-2xl space-y-6" data-sd-id="33">
-                        <p class="text-[#5f8d68] leading-relaxed text-lg" data-sd-id="34">
-                            10 ans à automatiser des pipelines <span class="text-[#39ff7a]" data-sd-id="35">CI/CD</span>, industrialiser des déploiements et fiabiliser des plateformes. Spécialiste Ansible, ArgoCD et OpenShift — <span class="text-[#39ff7a]" data-sd-id="36">du commit à la prod</span>, sans clic manuel.
-                        </p>
-                        
-                        <div class="flex flex-wrap gap-x-8 gap-y-3 text-xs font-medium uppercase tracking-wider text-[#5f8d68]" data-sd-id="37">
-                            <span class="flex items-center gap-2" data-sd-id="38"><span class="text-[#39ff7a]" data-sd-id="39">[x]</span> Localisation : France · Remote</span>
-                            <span class="flex items-center gap-2" data-sd-id="40"><span class="text-[#39ff7a]" data-sd-id="41">[x]</span> 10 ans d'expérience</span>
-                            <span class="flex items-center gap-2" data-sd-id="42"><span class="text-[#39ff7a]" data-sd-id="43">[x]</span> Disponible</span>
-                        </div>
-
-                        <div class="flex flex-wrap gap-4 pt-4" data-sd-id="44">
-                            <a href="#work" id="cta-work" class="bg-[#39ff7a] text-[#050805] px-6 py-3 font-bold text-sm tracking-tighter glow-text hover:brightness-110 transition-all flex items-center gap-2" data-sd-id="45">
-                                $ ls ~/projets -&gt;
-                            </a>
-                            <a href="#contact" id="cta-contact" class="border border-[#1c7a3c] text-[#39ff7a] px-6 py-3 font-medium text-sm tracking-tighter hover:bg-[#143614] transition-all" data-sd-id="46">
-                                ./contact --recruter
-                            </a>
-                        </div>
-                    </div>
-                </section>
-
-                <div class="h-px w-full bg-gradient-to-r from-transparent via-[#143614] to-transparent" data-sd-id="47"></div>
-
-                <!-- (2) NEOFETCH IDENTITY -->
-                <section id="identity" data-sd-id="48">
-                    <div class="flex items-center gap-3 text-sm mb-10" data-sd-id="49">
-                        <span class="text-[#5cf6ff]" data-sd-id="50">ksh2177</span>
-                        <span class="text-[#39ff7a]" data-sd-id="51">~/devops $</span>
-                        <span class="text-[#eafff1]" data-sd-id="52">neofetch</span>
-                    </div>
-
-                    <div class="flex flex-col md:flex-row gap-12 items-start" data-sd-id="53">
-                        <!-- ASCII Avatar -->
-                        <div class="w-full md:w-[230px] shrink-0" data-sd-id="54">
-                            <pre class="text-[#39ff7a] glow-soft text-[10px] leading-[1.1] font-bold" data-sd-id="55">     _nnnn_
-    dGGGGMMb
-   @p~qp~~qMb
-   M|@||@) M|
-   @,----.JM|
-  JS^\__/  qKL
- dP        MMb
- | b      dJP'
- \  pq  ppVP
-  "  bb  "
-   <span class="text-xs text-[#5f8d68] opacity-80 block text-center mt-4 tracking-widest uppercase" data-sd-id="56">ksh2177@devops</span>
-                            </pre>
-                        </div>
-
-                        <!-- System Info -->
-                        <div class="flex-1 space-y-1" data-sd-id="57">
-                            <div class="text-[#eafff1] font-bold tracking-tight mb-2" data-sd-id="58">ksh2177@cs-consulting ----------</div>
-                            <div class="grid grid-cols-[100px_1fr] gap-x-4 gap-y-1 text-sm" data-sd-id="59">
-                                <span class="text-[#39ff7a] font-medium" data-sd-id="60">OS:</span> <span class="text-[#5f8d68]" data-sd-id="61">Humain v10.0 (build DevOps)</span>
-                                <span class="text-[#39ff7a] font-medium" data-sd-id="62">Host:</span> <span class="text-[#5f8d68]" data-sd-id="63">CS Consulting · Freelance</span>
-                                <span class="text-[#39ff7a] font-medium" data-sd-id="64">Role:</span> <span class="text-[#5f8d68]" data-sd-id="65">Ingénieur DevOps</span>
-                                <span class="text-[#39ff7a] font-medium" data-sd-id="66">Uptime:</span> <span class="text-[#5f8d68]" data-sd-id="67">10 ans, multi-secteurs</span>
-                                <span class="text-[#39ff7a] font-medium" data-sd-id="68">Shell:</span> <span class="text-[#5f8d68]" data-sd-id="69">zsh, tmux, git</span>
-                                <span class="text-[#39ff7a] font-medium" data-sd-id="70">Stack:</span> <span class="text-[#5f8d68]" data-sd-id="71">CI/CD, Ansible, ArgoCD, OpenShift</span>
-                                <span class="text-[#39ff7a] font-medium" data-sd-id="72">Focus:</span> <span class="text-[#5f8d68]" data-sd-id="73">automatisation &amp; GitOps</span>
-                                <span class="text-[#39ff7a] font-medium" data-sd-id="74">Status:</span> <span class="text-[#ffd24a] glow-amber" data-sd-id="75">Disponible</span>
-                            </div>
-                            
-                            <!-- Color Swatches -->
-                            <div class="flex gap-1.5 mt-6" data-sd-id="76">
-                                <div class="w-6 h-3 bg-[#000000] border border-[#143614]" data-sd-id="77"></div>
-                                <div class="w-6 h-3 bg-[#1c7a3c] border border-[#143614]" data-sd-id="78"></div>
-                                <div class="w-6 h-3 bg-[#2bbf5c] border border-[#143614]" data-sd-id="79"></div>
-                                <div class="w-6 h-3 bg-[#39ff7a] border border-[#143614]" data-sd-id="80"></div>
-                                <div class="w-6 h-3 bg-[#5cf6ff] border border-[#143614]" data-sd-id="81"></div>
-                                <div class="w-6 h-3 bg-[#ffd24a] border border-[#143614]" data-sd-id="82"></div>
-                                <div class="w-6 h-3 bg-[#eafff1] border border-[#143614]" data-sd-id="83"></div>
-                                <div class="w-6 h-3 bg-[#5f8d68] border border-[#143614]" data-sd-id="84"></div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <div class="h-px w-full bg-gradient-to-r from-transparent via-[#143614] to-transparent" data-sd-id="85"></div>
-
-                <!-- (3) WORK GRID -->
-                <section id="work" class="space-y-8" data-sd-id="86">
-                    <div class="flex flex-col gap-1" data-sd-id="87">
-                        <div class="flex items-center gap-3 text-sm" data-sd-id="88">
-                            <span class="text-[#5cf6ff]" data-sd-id="89">ksh2177</span>
-                            <span class="text-[#39ff7a]" data-sd-id="90">~/devops $</span>
-                            <span class="text-[#eafff1]" data-sd-id="91">ls -la ~/projets</span>
-                            <span class="text-[#5f8d68] opacity-60 ml-2" data-sd-id="92"># 6 sélectionnés</span>
-                        </div>
-                        <div class="flex items-center gap-3 mt-4" data-sd-id="93">
-                            <span class="text-[10px] uppercase tracking-[0.3em] text-[#39ff7a] opacity-60" data-sd-id="94">&gt; travaux choisis</span>
-                            <h2 class="text-[#eafff1] font-bold text-lg" data-sd-id="95">Construit et livré <span class="text-[#1c7a3c] font-normal ml-2" data-sd-id="96">// drwxr-xr-x</span></h2>
-                        </div>
-                    </div>
-
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6" data-sd-id="97">
-                        <!-- Project 1 -->
-                        <div class="project-card bg-[#050805] border border-[#143614] p-5 rounded-md transition-all group" data-sd-id="98">
-                            <div class="flex justify-between items-baseline mb-3" data-sd-id="99">
-                                <h3 class="text-[#39ff7a] font-bold tracking-tight" data-sd-id="100">norteo/</h3>
-                                <div class="flex items-center gap-3 text-[10px] font-mono" data-sd-id="101">
-                                    <span class="text-[#ffd24a] glow-amber" data-sd-id="102">v4.1.0</span>
-                                    <span class="text-[#1c7a3c]" data-sd-id="103">-rwxr-x---</span>
-                                </div>
-                            </div>
-                            <p class="text-sm text-[#5f8d68] mb-4" data-sd-id="104">
-                                GMAO SaaS <span class="text-[#39ff7a]" data-sd-id="105">tout-en-un multi-métier</span> — CI/CD Gitea Actions, déploiement Blue-Green, qualité SonarQube.
-                            </p>
-                            <div class="flex flex-wrap gap-2 mb-6" data-sd-id="106">
-                                <span class="text-[9px] px-1.5 py-0.5 border border-[#ffd24a]/30 text-[#ffd24a] uppercase tracking-tighter" data-sd-id="107">SaaS</span>
-                                <span class="text-[9px] px-1.5 py-0.5 border border-[#143614] text-[#5f8d68] uppercase tracking-tighter" data-sd-id="108">React</span>
-                                <span class="text-[9px] px-1.5 py-0.5 border border-[#143614] text-[#5f8d68] uppercase tracking-tighter" data-sd-id="109">CI/CD</span>
-                            </div>
-                            <div class="flex gap-4 text-xs font-bold uppercase tracking-widest" data-sd-id="110">
-                                <span class="text-[#1c7a3c]" data-sd-id="111">// code privé</span>
-                            </div>
-                        </div>
-
-                        <!-- Project 2 -->
-                        <div class="project-card bg-[#050805] border border-[#143614] p-5 rounded-md transition-all group" data-sd-id="113">
-                            <div class="flex justify-between items-baseline mb-3" data-sd-id="114">
-                                <h3 class="text-[#39ff7a] font-bold tracking-tight" data-sd-id="115">hub/</h3>
-                                <div class="flex items-center gap-3 text-[10px] font-mono" data-sd-id="116">
-                                    <span class="text-[#ffd24a] glow-amber" data-sd-id="117">24/7</span>
-                                    <span class="text-[#1c7a3c]" data-sd-id="118">drwxr-x---</span>
-                                </div>
-                            </div>
-                            <p class="text-sm text-[#5f8d68] mb-4" data-sd-id="119">
-                                Plateforme homelab <span class="text-[#39ff7a]" data-sd-id="120">mutualisée</span> — Gitea, Infisical, Authentik, observabilité OTel → VictoriaMetrics → Grafana.
-                            </p>
-                            <div class="flex flex-wrap gap-2 mb-6" data-sd-id="121">
-                                <span class="text-[9px] px-1.5 py-0.5 border border-[#ffd24a]/30 text-[#ffd24a] uppercase tracking-tighter" data-sd-id="122">Infra</span>
-                                <span class="text-[9px] px-1.5 py-0.5 border border-[#143614] text-[#5f8d68] uppercase tracking-tighter" data-sd-id="123">Docker</span>
-                                <span class="text-[9px] px-1.5 py-0.5 border border-[#143614] text-[#5f8d68] uppercase tracking-tighter" data-sd-id="124">OTel</span>
-                            </div>
-                            <div class="flex gap-4 text-xs font-bold uppercase tracking-widest" data-sd-id="125">
-                                <span class="text-[#1c7a3c]" data-sd-id="126">// self-hosted</span>
-                            </div>
-                        </div>
-
-                        <!-- Project 3 -->
-                        <div class="project-card bg-[#050805] border border-[#143614] p-5 rounded-md transition-all group" data-sd-id="128">
-                            <div class="flex justify-between items-baseline mb-3" data-sd-id="129">
-                                <h3 class="text-[#39ff7a] font-bold tracking-tight" data-sd-id="130">skynet/</h3>
-                                <div class="flex items-center gap-3 text-[10px] font-mono" data-sd-id="131">
-                                    <span class="text-[#ffd24a] glow-amber" data-sd-id="132">local-first</span>
-                                    <span class="text-[#1c7a3c]" data-sd-id="133">-rwx------</span>
-                                </div>
-                            </div>
-                            <p class="text-sm text-[#5f8d68] mb-4" data-sd-id="134">
-                                Assistant vocal <span class="text-[#39ff7a]" data-sd-id="135">local-first</span> + cockpit desktop translucide (Tauri), piloté par Claude — la voix commande, l'IA agit.
-                            </p>
-                            <div class="flex flex-wrap gap-2 mb-6" data-sd-id="136">
-                                <span class="text-[9px] px-1.5 py-0.5 border border-[#ffd24a]/30 text-[#ffd24a] uppercase tracking-tighter" data-sd-id="137">IA</span>
-                                <span class="text-[9px] px-1.5 py-0.5 border border-[#143614] text-[#5f8d68] uppercase tracking-tighter" data-sd-id="138">Tauri</span>
-                                <span class="text-[9px] px-1.5 py-0.5 border border-[#143614] text-[#5f8d68] uppercase tracking-tighter" data-sd-id="139">Rust</span>
-                            </div>
-                            <div class="flex gap-4 text-xs font-bold uppercase tracking-widest" data-sd-id="140">
-                                <span class="text-[#1c7a3c]" data-sd-id="141">// outil perso</span>
-                            </div>
-                        </div>
-
-                        <!-- Project 4 -->
-                        <div class="project-card bg-[#050805] border border-[#143614] p-5 rounded-md transition-all group" data-sd-id="143">
-                            <div class="flex justify-between items-baseline mb-3" data-sd-id="144">
-                                <h3 class="text-[#39ff7a] font-bold tracking-tight" data-sd-id="145">nalarch/</h3>
-                                <div class="flex items-center gap-3 text-[10px] font-mono" data-sd-id="146">
-                                    <span class="text-[#ffd24a] glow-amber" data-sd-id="147">open source</span>
-                                    <span class="text-[#1c7a3c]" data-sd-id="148">-rwxr-xr-x</span>
-                                </div>
-                            </div>
-                            <p class="text-sm text-[#5f8d68] mb-4" data-sd-id="149">
-                                Gestionnaire de paquets <span class="text-[#39ff7a]" data-sd-id="150">TUI pour Arch Linux</span>, dans l'esprit de nala — libalpm en lecture, paru en écriture.
-                            </p>
-                            <div class="flex flex-wrap gap-2 mb-6" data-sd-id="151">
-                                <span class="text-[9px] px-1.5 py-0.5 border border-[#ffd24a]/30 text-[#ffd24a] uppercase tracking-tighter" data-sd-id="152">Open Source</span>
-                                <span class="text-[9px] px-1.5 py-0.5 border border-[#143614] text-[#5f8d68] uppercase tracking-tighter" data-sd-id="153">TUI</span>
-                                <span class="text-[9px] px-1.5 py-0.5 border border-[#143614] text-[#5f8d68] uppercase tracking-tighter" data-sd-id="154">Arch</span>
-                            </div>
-                            <div class="flex gap-4 text-xs font-bold uppercase tracking-widest text-[#39ff7a]" data-sd-id="155">
-                                <a href="https://github.com/ksh2177?tab=repositories" target="_blank" rel="noopener" id="p4-source" class="flex items-center gap-1.5 hover:glow-text" data-sd-id="157">→ Source</a>
-                            </div>
-                        </div>
-
-                        <!-- Project 5 -->
-                        <div class="project-card bg-[#050805] border border-[#143614] p-5 rounded-md transition-all group" data-sd-id="300">
-                            <div class="flex justify-between items-baseline mb-3" data-sd-id="301">
-                                <h3 class="text-[#39ff7a] font-bold tracking-tight" data-sd-id="302">aubevent/</h3>
-                                <div class="flex items-center gap-3 text-[10px] font-mono" data-sd-id="303">
-                                    <span class="text-[#ffd24a] glow-amber" data-sd-id="304">side quest</span>
-                                    <span class="text-[#1c7a3c]" data-sd-id="305">-rwxr-x---</span>
-                                </div>
-                            </div>
-                            <p class="text-sm text-[#5f8d68] mb-4" data-sd-id="306">
-                                Action-RPG <span class="text-[#39ff7a]" data-sd-id="307">Godot 4</span> — chemins, créatures, butin, village. Fait pour être joué par la famille et les amis.
-                            </p>
-                            <div class="flex flex-wrap gap-2 mb-6" data-sd-id="308">
-                                <span class="text-[9px] px-1.5 py-0.5 border border-[#ffd24a]/30 text-[#ffd24a] uppercase tracking-tighter" data-sd-id="309">Jeu</span>
-                                <span class="text-[9px] px-1.5 py-0.5 border border-[#143614] text-[#5f8d68] uppercase tracking-tighter" data-sd-id="310">Godot</span>
-                                <span class="text-[9px] px-1.5 py-0.5 border border-[#143614] text-[#5f8d68] uppercase tracking-tighter" data-sd-id="311">GDScript</span>
-                            </div>
-                            <div class="flex gap-4 text-xs font-bold uppercase tracking-widest" data-sd-id="312">
-                                <span class="text-[#1c7a3c]" data-sd-id="313">// projet perso</span>
-                            </div>
-                        </div>
-
-                        <!-- Project 6 -->
-                        <div class="project-card bg-[#050805] border border-[#143614] p-5 rounded-md transition-all group" data-sd-id="320">
-                            <div class="flex justify-between items-baseline mb-3" data-sd-id="321">
-                                <h3 class="text-[#39ff7a] font-bold tracking-tight" data-sd-id="322">homelab/</h3>
-                                <div class="flex items-center gap-3 text-[10px] font-mono" data-sd-id="323">
-                                    <span class="text-[#ffd24a] glow-amber" data-sd-id="324">documenté</span>
-                                    <span class="text-[#1c7a3c]" data-sd-id="325">-rwxr-xr-x</span>
-                                </div>
-                            </div>
-                            <p class="text-sm text-[#5f8d68] mb-4" data-sd-id="326">
-                                Homelab public documenté — cluster <span class="text-[#39ff7a]" data-sd-id="327">K3s sur Raspberry Pi</span>, GitOps ArgoCD, provisioning Ansible/AAP2, monitoring et domotique. Tout en infrastructure as code.
-                            </p>
-                            <div class="flex flex-wrap gap-2 mb-6" data-sd-id="328">
-                                <span class="text-[9px] px-1.5 py-0.5 border border-[#ffd24a]/30 text-[#ffd24a] uppercase tracking-tighter" data-sd-id="329">IaC</span>
-                                <span class="text-[9px] px-1.5 py-0.5 border border-[#143614] text-[#5f8d68] uppercase tracking-tighter" data-sd-id="330">K3s</span>
-                                <span class="text-[9px] px-1.5 py-0.5 border border-[#143614] text-[#5f8d68] uppercase tracking-tighter" data-sd-id="331">ArgoCD</span>
-                                <span class="text-[9px] px-1.5 py-0.5 border border-[#143614] text-[#5f8d68] uppercase tracking-tighter" data-sd-id="332">Ansible</span>
-                            </div>
-                            <div class="flex gap-4 text-xs font-bold uppercase tracking-widest text-[#39ff7a]" data-sd-id="333">
-                                <a href="https://homelab.scasse.com" target="_blank" rel="noopener" id="p6-site" class="flex items-center gap-1.5 hover:glow-text" data-sd-id="334">→ homelab.scasse.com</a>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <div class="h-px w-full bg-gradient-to-r from-transparent via-[#143614] to-transparent" data-sd-id="158"></div>
-
-                <!-- (4) SKILL METERS -->
-                <section id="stack" class="space-y-8" data-sd-id="159">
-                    <div class="flex flex-col gap-1" data-sd-id="160">
-                        <div class="flex items-center gap-3 text-sm" data-sd-id="161">
-                            <span class="text-[#5cf6ff]" data-sd-id="162">ksh2177</span>
-                            <span class="text-[#39ff7a]" data-sd-id="163">~/devops $</span>
-                            <span class="text-[#eafff1]" data-sd-id="164">cat stack.txt | sort -r</span>
-                        </div>
-                        <div class="flex items-center gap-3 mt-4" data-sd-id="165">
-                            <span class="text-[10px] uppercase tracking-[0.3em] text-[#39ff7a] opacity-60" data-sd-id="166">&gt; compétences</span>
-                            <h2 class="text-[#eafff1] font-bold text-lg" data-sd-id="167">Les outils du quotidien <span class="text-[#1c7a3c] font-normal ml-2" data-sd-id="168">// auto-évalué, honnête</span></h2>
-                        </div>
-                    </div>
-
-                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-16 gap-y-4" data-sd-id="169">
-                        <!-- Skill 1 -->
-                        <div class="grid grid-cols-[150px_1fr_40px] items-center gap-4" data-sd-id="170">
-                            <span class="text-sm" data-sd-id="171">CI/CD</span>
-                            <div class="h-2.5 bg-[#070b07] border border-[#143614] rounded-sm relative overflow-hidden" data-sd-id="172">
-                                <div class="skill-bar-fill h-full" style="width: 95%" data-sd-id="173"></div>
-                            </div>
-                            <span class="text-xs text-[#39ff7a] text-right" data-sd-id="174">95%</span>
-                        </div>
-                        <!-- Skill 2 -->
-                        <div class="grid grid-cols-[150px_1fr_40px] items-center gap-4" data-sd-id="175">
-                            <span class="text-sm" data-sd-id="176">Ansible</span>
-                            <div class="h-2.5 bg-[#070b07] border border-[#143614] rounded-sm relative overflow-hidden" data-sd-id="177">
-                                <div class="skill-bar-fill h-full" style="width: 92%" data-sd-id="178"></div>
-                            </div>
-                            <span class="text-xs text-[#39ff7a] text-right" data-sd-id="179">92%</span>
-                        </div>
-                        <!-- Skill 3 -->
-                        <div class="grid grid-cols-[150px_1fr_40px] items-center gap-4" data-sd-id="180">
-                            <span class="text-sm" data-sd-id="181">OpenShift/K8s</span>
-                            <div class="h-2.5 bg-[#070b07] border border-[#143614] rounded-sm relative overflow-hidden" data-sd-id="182">
-                                <div class="skill-bar-fill h-full" style="width: 88%" data-sd-id="183"></div>
-                            </div>
-                            <span class="text-xs text-[#39ff7a] text-right" data-sd-id="184">88%</span>
-                        </div>
-                        <!-- Skill 4 -->
-                        <div class="grid grid-cols-[150px_1fr_40px] items-center gap-4" data-sd-id="185">
-                            <span class="text-sm" data-sd-id="186">Docker</span>
-                            <div class="h-2.5 bg-[#070b07] border border-[#143614] rounded-sm relative overflow-hidden" data-sd-id="187">
-                                <div class="skill-bar-fill h-full" style="width: 90%" data-sd-id="188"></div>
-                            </div>
-                            <span class="text-xs text-[#39ff7a] text-right" data-sd-id="189">90%</span>
-                        </div>
-                        <!-- Skill 5 -->
-                        <div class="grid grid-cols-[150px_1fr_40px] items-center gap-4" data-sd-id="190">
-                            <span class="text-sm" data-sd-id="191">ArgoCD/GitOps</span>
-                            <div class="h-2.5 bg-[#070b07] border border-[#143614] rounded-sm relative overflow-hidden" data-sd-id="192">
-                                <div class="skill-bar-fill h-full" style="width: 88%" data-sd-id="193"></div>
-                            </div>
-                            <span class="text-xs text-[#39ff7a] text-right" data-sd-id="194">88%</span>
-                        </div>
-                        <!-- Skill 6 -->
-                        <div class="grid grid-cols-[150px_1fr_40px] items-center gap-4" data-sd-id="195">
-                            <span class="text-sm" data-sd-id="196">Linux</span>
-                            <div class="h-2.5 bg-[#070b07] border border-[#143614] rounded-sm relative overflow-hidden" data-sd-id="197">
-                                <div class="skill-bar-fill h-full" style="width: 92%" data-sd-id="198"></div>
-                            </div>
-                            <span class="text-xs text-[#39ff7a] text-right" data-sd-id="199">92%</span>
-                        </div>
-                        <!-- Skill 7 -->
-                        <div class="grid grid-cols-[150px_1fr_40px] items-center gap-4" data-sd-id="200">
-                            <span class="text-sm" data-sd-id="201">Observabilité</span>
-                            <div class="h-2.5 bg-[#070b07] border border-[#143614] rounded-sm relative overflow-hidden" data-sd-id="202">
-                                <div class="skill-bar-fill h-full" style="width: 86%" data-sd-id="203"></div>
-                            </div>
-                            <span class="text-xs text-[#39ff7a] text-right" data-sd-id="204">86%</span>
-                        </div>
-                        <!-- Skill 8 -->
-                        <div class="grid grid-cols-[150px_1fr_40px] items-center gap-4" data-sd-id="205">
-                            <span class="text-sm" data-sd-id="206">Python/Bash</span>
-                            <div class="h-2.5 bg-[#070b07] border border-[#143614] rounded-sm relative overflow-hidden" data-sd-id="207">
-                                <div class="skill-bar-fill h-full" style="width: 84%" data-sd-id="208"></div>
-                            </div>
-                            <span class="text-xs text-[#39ff7a] text-right" data-sd-id="209">84%</span>
-                        </div>
-                    </div>
-                </section>
-
-                <div class="h-px w-full bg-gradient-to-r from-transparent via-[#143614] to-transparent" data-sd-id="210"></div>
-
-                <!-- (5) CONTACT CTA -->
-                <section id="contact" class="flex flex-col items-center py-12" data-sd-id="211">
-                    <div class="w-full flex items-center gap-3 text-sm mb-12" data-sd-id="212">
-                        <span class="text-[#5cf6ff]" data-sd-id="213">ksh2177</span>
-                        <span class="text-[#39ff7a]" data-sd-id="214">~/devops $</span>
-                        <span class="text-[#eafff1]" data-sd-id="215">./contact --recruter</span>
-                    </div>
-
-                    <div class="w-full bg-gradient-to-b from-[#0a120a] to-[#050805] border border-[#1f4d1f] rounded-lg p-12 text-center relative overflow-hidden group" data-sd-id="216">
-                        <!-- Background glow effect -->
-                        <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-1000 bg-[radial-gradient(circle_at_center,rgba(57,255,122,0.05)_0%,transparent_70%)]" data-sd-id="217"></div>
-                        
-                        <div class="relative z-10 space-y-6" data-sd-id="218">
-                            <h2 class="text-3xl md:text-4xl font-extrabold text-[#eafff1] glow-text tracking-tight" data-sd-id="219">
-                                Automatisons <span class="text-[#39ff7a]" data-sd-id="220">votre delivery</span>.
-                            </h2>
-                            <p class="text-[#5f8d68] max-w-lg mx-auto leading-relaxed" data-sd-id="221">
-                                Disponible pour des missions DevOps : CI/CD, automatisation, GitOps, conteneurisation et fiabilisation de plateformes.
-                            </p>
-
-                            <a href="https://www.linkedin.com/in/stephen-casse/" target="_blank" rel="noopener" class="mt-8 mb-10 inline-flex items-center gap-3 bg-[#000000] border border-[#143614] p-4 rounded-md shadow-[inset_0_2px_10px_rgba(0,0,0,0.5)] glow-soft hover:border-[#39ff7a] transition-all" data-sd-id="222">
-                                <span class="text-[#39ff7a] font-bold" data-sd-id="223">$</span>
-                                <code class="text-[#eafff1] font-mono tracking-wide">open linkedin.com/in/stephen-casse</code>
-                                <span class="cursor-blink" data-sd-id="224"></span>
-                            </a>
-
-                            <div class="flex flex-wrap justify-center gap-4" data-sd-id="225">
-                                <a href="https://github.com/ksh2177?tab=repositories" target="_blank" rel="noopener" id="social-github" class="flex items-center gap-2 px-4 py-2 border border-[#143614] hover:border-[#39ff7a] hover:text-[#39ff7a] transition-all text-xs uppercase tracking-widest font-medium group/link" data-sd-id="226">
-                                    <span class="text-[#39ff7a] group-hover/link:translate-x-1 transition-transform" data-sd-id="227">→</span> github
-                                </a>
-                                <a href="https://www.linkedin.com/in/stephen-casse/" target="_blank" rel="noopener" id="social-linkedin" class="flex items-center gap-2 px-4 py-2 border border-[#143614] hover:border-[#39ff7a] hover:text-[#39ff7a] transition-all text-xs uppercase tracking-widest font-medium group/link" data-sd-id="228">
-                                    <span class="text-[#39ff7a] group-hover/link:translate-x-1 transition-transform" data-sd-id="229">→</span> linkedin
-                                </a>
-                                <a href="https://homelab.scasse.com" target="_blank" rel="noopener" id="social-homelab" class="flex items-center gap-2 px-4 py-2 border border-[#143614] hover:border-[#39ff7a] hover:text-[#39ff7a] transition-all text-xs uppercase tracking-widest font-medium group/link" data-sd-id="340">
-                                    <span class="text-[#39ff7a] group-hover/link:translate-x-1 transition-transform" data-sd-id="341">→</span> homelab
-                                </a>
-                                <a href="https://freelance.scasse.com/" target="_blank" rel="noopener" id="social-freelance" class="flex items-center gap-2 px-4 py-2 border border-[#143614] hover:border-[#39ff7a] hover:text-[#39ff7a] transition-all text-xs uppercase tracking-widest font-medium group/link" data-sd-id="342">
-                                    <span class="text-[#39ff7a] group-hover/link:translate-x-1 transition-transform" data-sd-id="343">→</span> notion
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-            </main>
-
-            <!-- Footer Strip -->
-            <footer class="bg-[#070b07] border-t border-[#143614] py-3 px-6 flex items-center justify-between shrink-0" data-sd-id="234">
-                <div class="text-[10px] tracking-wider flex items-center gap-2" data-sd-id="235">
-                    <span class="text-[#39ff7a] opacity-80" data-sd-id="236">$</span>
-                    <span class="text-[#5f8d68]" data-sd-id="237">echo "(c) 2026 Stephen Casse — CS Consulting, construit dans le terminal"</span>
-                    <span class="w-1.5 h-3 bg-[#39ff7a] cursor-blink" data-sd-id="238"></span>
-                </div>
-                <div class="text-[9px] text-[#1c7a3c] tracking-widest uppercase font-medium flex items-center gap-4" data-sd-id="239">
-                    <span data-sd-id="240">dernier commit : aujourd'hui</span>
-                    <span data-sd-id="241">main@7eb4fcb</span>
-                    <span class="text-[#39ff7a]/40" data-sd-id="242">uptime 99.98%</span>
-                </div>
-            </footer>
-        </div>
-    </div>
-
-    <!-- Background Layer Scripts -->
-    <script>
-        // Optional: Simple scroll reveal or terminal typing simulation could go here
-        console.log('Terminal initialized. Welcome, operator.');
-    </script>
-
-</body></html>
+<div data-lang="en">
+<header class="hero"><div class="wrap">
+  <div>
+    <div class="mono" style="font-size: 13px; color: var(--mono);">$ whoami</div>
+    <h1>Stephen Casse<span>Freelance DevOps Engineer</span></h1>
+    <p>Ten years in banking production (Amundi, BPCE). I industrialise deployments, automate CI/CD pipelines and deliver portable, documented and secured environments — from commit to production, with no manual step.</p>
+    <div class="cta"><a class="btn" href="cv-stephen-casse-en.pdf" download>Download résumé (PDF)</a><a class="btn ghost" href="#contact">Get in touch</a></div>
+    <div class="avail mono"><i></i>available for assignments · Paris area, France · Remote</div>
+  </div>
+  <div class="facts"><div class="fact"><b style="color: var(--k0);">10 years</b><span>banking & finance production</span></div><div class="fact"><b style="color: var(--k1);">4 clients</b><span>Amundi, BPCE IT, BPCE Lease, Euler Hermes</span></div><div class="fact"><b style="color: var(--k2);">1 standard</b><span>Apache stack adopted group-wide in production</span></div><div class="fact"><b style="color: var(--k3);">9 apps</b><span>GitOps on my K3s cluster</span></div></div>
+</div></header>
+<section id="xp"><div class="wrap"><h2 class="mono">// experience</h2><div class="xp"><div class="when mono" style="color: var(--k0);"><i style="background: var(--kb0);"></i>Nov 2024 → present<small>Paris · hybrid</small></div><div><h3>BPCE IT — BPCE Financement</h3><div class="role">DevOps Engineer, Build & Integration</div><p><b>Portable</b> Apache HTTPD stack compiled on RHEL 6 → 9.5, packaged with no system dependency, SSL/LDAP without root privileges — <b>adopted as the production standard</b>.</p></div></div><div class="xp"><div class="when mono" style="color: var(--k1);"><i style="background: var(--kb1);"></i>Jan 2022 → Dec 2024<small>Paris · hybrid</small></div><div><h3>Amundi Technologies</h3><div class="role">DevOps Engineer — application lead, deputy tech lead</div><p>Automated fail-over of application and database clusters: <b>80 % time saved</b> during DR exercises, human-error risk almost eliminated.</p></div></div><div class="xp"><div class="when mono" style="color: var(--k2);"><i style="background: var(--kb2);"></i>Dec 2020 → Dec 2021<small>Paris · hybrid</small></div><div><h3>BPCE Lease</h3><div class="role">Cloud tech lead & production engineer</div><p>End-to-end PowerBI → Azure migration: sizing, network, security, access rights, gateway, ODBC; <b>delivered unsupervised</b> and fully documented (technical, functional, costs).</p></div></div><div class="more">Amundi (2018 → 2020, operations analyst) · Euler Hermes (2015 → 2017, operations & datacenter technician) — details in the résumé.</div></div></section>
+<section id="projects" class="alt"><div class="wrap"><h2 class="mono">// projects</h2><div class="grid3"><div class="card" style="border-top-color: var(--kb0);"><h3>Homelab K3s, 100 % GitOps</h3><div class="stack mono">homelab.scasse.com</div><p>3 Raspberry Pi 4, K3s 1.29, MetalLB, Longhorn, cert-manager, Sealed Secrets, Argo CD App-of-Apps (9 apps), 3 Ansible playbooks, Hugo docs deployed by GitLab CI.</p><a class="lnk mono" href="https://homelab.scasse.com" target="_blank" rel="noopener">→ homelab.scasse.com</a></div><div class="card" style="border-top-color: var(--kb1);"><h3>Hub — shared platform</h3><div class="stack mono">NUC XCP-ng</div><p>Gitea, Infisical, Authentik, observability OpenTelemetry → VictoriaMetrics → Grafana, Gitea Actions CI with a SonarQube quality gate.</p><span class="priv mono">// private code</span></div><div class="card" style="border-top-color: var(--kb2);"><h3>Skynet — local-first AI cockpit</h3><div class="stack mono">Claude · MCP</div><p>Personal assistant driven by Claude: semantic memory, MCP tools, fleet supervision, voice; continuous deployment to a VM.</p><span class="priv mono">// private code</span></div><div class="card" style="border-top-color: var(--kb3);"><h3>nalarch — open source</h3><div class="stack mono">Rust · MIT</div><p>TUI package manager for Arch Linux; nothing runs without an approval screen.</p><a class="lnk mono" href="https://github.com/ksh2177/nalarch" target="_blank" rel="noopener">→ github.com/ksh2177/nalarch</a></div><div class="card" style="border-top-color: var(--kb0);"><h3>Norteo — CMMS SaaS</h3><div class="stack mono">React · Express · Prisma</div><p>Multi-tenant white-label; Gitea Actions CI/CD, Blue-Green deployment, SonarQube quality.</p><span class="priv mono">// private code</span></div></div></div></section>
+<section id="skills"><div class="wrap"><h2 class="mono">// skills</h2><div class="grid2"><div class="sk"><h3><i style="background: var(--kb0);"></i>Automation & CI/CD</h3><div class="tags"><span class="tag mono">Ansible</span><span class="tag mono">Ansible Automation Platform 2</span><span class="tag mono">AWX</span><span class="tag mono">Jenkins</span><span class="tag mono">GitLab CI</span><span class="tag mono">Bitbucket</span><span class="tag mono">Artifactory</span><span class="tag mono">XL Deploy / XL Release</span><span class="tag mono">ArgoCD</span><span class="tag mono">Helm</span><span class="tag mono">Kustomize</span></div></div><div class="sk"><h3><i style="background: var(--kb1);"></i>Containers & orchestration</h3><div class="tags"><span class="tag mono">Docker</span><span class="tag mono">Kubernetes</span><span class="tag mono">K3s</span><span class="tag mono">OpenShift</span><span class="tag mono">Longhorn</span><span class="tag mono">MetalLB</span><span class="tag mono">ingress-nginx</span><span class="tag mono">cert-manager</span><span class="tag mono">Sealed Secrets</span></div></div><div class="sk"><h3><i style="background: var(--kb2);"></i>Cloud & IaC</h3><div class="tags"><span class="tag mono">Azure and Terraform (BPCE Lease migration 2021)</span><span class="tag mono">XCP-ng</span><span class="tag mono">vSphere</span><span class="tag mono">Docker Compose</span></div></div><div class="sk"><h3><i style="background: var(--kb3);"></i>Systems</h3><div class="tags"><span class="tag mono">Red Hat (RHEL 6 → 9.5)</span><span class="tag mono">SUSE</span><span class="tag mono">Debian/Arch</span><span class="tag mono">AIX</span><span class="tag mono">Solaris</span><span class="tag mono">Windows Server</span><span class="tag mono">Apache HTTPD</span><span class="tag mono">JBoss</span><span class="tag mono">Nginx</span></div></div><div class="sk"><h3><i style="background: var(--kb0);"></i>Observability</h3><div class="tags"><span class="tag mono">Prometheus</span><span class="tag mono">Grafana</span><span class="tag mono">Loki</span><span class="tag mono">OpenTelemetry</span><span class="tag mono">VictoriaMetrics</span><span class="tag mono">Centreon</span><span class="tag mono">Zabbix</span><span class="tag mono">AppDynamics</span><span class="tag mono">Splunk</span></div></div><div class="sk"><h3><i style="background: var(--kb1);"></i>Security</h3><div class="tags"><span class="tag mono">SSL/TLS</span><span class="tag mono">OpenSSL</span><span class="tag mono">JKS keystores</span><span class="tag mono">Venafi</span><span class="tag mono">LDAP</span><span class="tag mono">Infisical</span><span class="tag mono">Authentik</span><span class="tag mono">Linux hardening</span></div></div><div class="sk"><h3><i style="background: var(--kb2);"></i>Languages</h3><div class="tags"><span class="tag mono">Bash</span><span class="tag mono">Python</span><span class="tag mono">jq</span><span class="tag mono">YAML</span><span class="tag mono">Jinja2</span><span class="tag mono">JSON</span><span class="tag mono">Rust (basics)</span><span class="tag mono">C</span></div></div><div class="sk"><h3><i style="background: var(--kb3);"></i>Ways of working</h3><div class="tags"><span class="tag mono">Run & 24/7 on-call</span><span class="tag mono">ITIL</span><span class="tag mono">Agile</span><span class="tag mono">documentation</span><span class="tag mono">team training</span></div></div></div></div></section>
+<section id="contact" class="contact"><div class="wrap">
+  <div><h2 class="mono">// contact</h2><div class="big">Let's automate your delivery.</div>
+    <div class="links"><span style="color: var(--k0);"><svg class="" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 5h18v14H3z"/><path d="M3 6l9 7 9-7"/></svg><a href="mailto:contact@scasse.com">contact@scasse.com</a></span>
+      <span style="color: var(--k1);"><svg class="" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1.5 1.5"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg><a href="https://linkedin.com/in/stephen-casse" target="_blank" rel="noopener">linkedin.com/in/stephen-casse</a></span>
+      <span style="color: var(--k2);"><svg class="" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="6" r="2.5"/><circle cx="6" cy="18" r="2.5"/><circle cx="18" cy="8" r="2.5"/><path d="M6 8.5v7M18 10.5a6 6 0 0 1-6 6H8.5"/></svg><a href="https://github.com/ksh2177" target="_blank" rel="noopener">github.com/ksh2177</a></span>
+      <span style="color: var(--k3);"><svg class="" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg><a href="https://homelab.scasse.com" target="_blank" rel="noopener">homelab.scasse.com</a></span></div>
+    <div class="cta"><a class="btn" href="cv-stephen-casse-fr.pdf" download>CV en français (PDF)</a><a class="btn ghost" href="cv-stephen-casse-en.pdf" download>English résumé (PDF)</a></div>
+  </div>
+  <div><img class="logo-light" src="assets/logo-light.png" alt="CS Consulting" style="height: auto;"><img class="logo-dark" src="assets/logo-dark.png" alt="CS Consulting" style="height: auto;"></div>
+</div></section>
+<footer><div class="wrap mono"><span>© 2026 Stephen Casse — CS Consulting</span><span>static HTML · GitHub Pages</span></div></footer>
+</div>
+<script>
+(function () {
+  var root = document.documentElement, store = window.localStorage;
+  function get(k) { try { return store.getItem(k); } catch (e) { return null; } }
+  function set(k, v) { try { store.setItem(k, v); } catch (e) {} }
+  var lang = get('lang') || (navigator.language || 'fr').slice(0, 2);
+  root.setAttribute('lang', lang === 'en' ? 'en' : 'fr');
+  var theme = get('theme'); if (theme) root.setAttribute('data-theme', theme);
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest('[data-set-lang]'); if (b) { root.setAttribute('lang', b.dataset.setLang); set('lang', b.dataset.setLang); }
+    var t = e.target.closest('[data-toggle-theme]');
+    if (t) { var dark = root.getAttribute('data-theme') === 'dark' || (!root.getAttribute('data-theme') && matchMedia('(prefers-color-scheme: dark)').matches);
+      var next = dark ? 'light' : 'dark'; root.setAttribute('data-theme', next); set('theme', next); }
+  });
+})();
+</script>
+</body>
+</html>
