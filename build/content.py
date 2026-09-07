@@ -69,7 +69,7 @@ FR = dict(
             cv_btn="Télécharger le CV (PDF)", contact_btn="Me contacter",
             sec=dict(xp="expériences", projects="projets", skills="compétences", contact="contact",
                      edu="formation", langs="langues", quotes="on dit de moi"),
-            tagline="Automatisons votre delivery.", cv_fr="CV français (PDF)", cv_en="English résumé (PDF)",
+            tagline="Automatisons votre delivery.", cv_fr="CV français (PDF)", cv_en="CV anglais (PDF)",
             footer_right="construit en HTML statique · GitHub Pages", theme="Basculer clair / sombre",
             cv_file="cv-stephen-casse-fr.pdf", page="page"),
 )
@@ -117,7 +117,7 @@ EN = dict(
         dict(co="Euler Hermes France", role="Operations & datacenter technician", when="Jul 2015 → Oct 2017", where="La Défense",
              ctx="", items=["Multi-OS operations (Unix, AIX, Windows), TWS/IWS, Nagios, SAP/CICS/WAS; 6 months in the datacenter (fibre patching, racking, physical go-live)."]),
     ],
-    xp_more="Amundi (2018 → 2020, operations analyst) · Euler Hermes (2015 → 2017, operations & datacenter technician) — details in the résumé.",
+    xp_more="Amundi (2018 → 2020, operations analyst) · Euler Hermes (2015 → 2017, operations & datacenter technician) — details in the CV.",
     projects=[
         ("Homelab K3s, 100 % GitOps", "homelab.scasse.com", "3 Raspberry Pi 4, K3s 1.29, MetalLB, Longhorn, cert-manager, Sealed Secrets, Argo CD App-of-Apps (9 apps), 3 Ansible playbooks, Hugo docs deployed by GitLab CI.", "https://homelab.scasse.com"),
         ("Hub — shared platform", "NUC XCP-ng", "Gitea, Infisical, Authentik, observability OpenTelemetry → VictoriaMetrics → Grafana, Gitea Actions CI with a SonarQube quality gate.", None),
@@ -132,10 +132,10 @@ EN = dict(
     quotes=["Autonomous, structured, documented. A reference on our scope.",
             "Able to take a technical project from A to Z, even in a sensitive environment."],
     ui=dict(nav=["Experience", "Projects", "Skills", "Contact"], whoami="$ whoami",
-            cv_btn="Download résumé (PDF)", contact_btn="Get in touch",
+            cv_btn="Download CV (PDF)", contact_btn="Get in touch",
             sec=dict(xp="experience", projects="projects", skills="skills", contact="contact",
                      edu="education", langs="languages", quotes="what they say"),
-            tagline="Let's automate your delivery.", cv_fr="CV en français (PDF)", cv_en="English résumé (PDF)",
+            tagline="Let's automate your delivery.", cv_fr="CV in French (PDF)", cv_en="CV in English (PDF)",
             footer_right="static HTML · GitHub Pages", theme="Toggle light / dark",
             cv_file="cv-stephen-casse-en.pdf", page="page"),
 )
