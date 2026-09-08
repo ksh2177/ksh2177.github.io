@@ -5,7 +5,6 @@ COMMON = dict(
     name="Stephen Casse", alias="ksh", company="CS Consulting",
     phone="06 58 44 35 79", mail="contact@scasse.com",
     linkedin="linkedin.com/in/stephen-casse", github="github.com/ksh2177", site="homelab.scasse.com",
-    palette=dict(blue="#373643", green="#18cb96", red="#ff4b4b"),
 )
 
 # Palettes du site — source unique, consommées par site.py (les deux thèmes) et par cv.py

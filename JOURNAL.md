@@ -41,16 +41,18 @@ entre sessions. État du repo au démarrage :
 - `cv.py` ne code plus aucune couleur en dur : bandeau = dégradé du hero du site, accents
   `#6866A7` / `#9775BA` (titres, icônes, `whoami`) et `#A86F9F` (dates, liserés), tags sur le
   fond chip `#f2ecf3`. Le CV réutilise `logo-light.png` : `logo-cv.png` supprimé.
-- Hors repo, même passe sur le dossier de compétences Word `~/Business/CV/CS_CONSULTING_CV_2026`
-  (`.docx` → `.doc` + `.pdf` régénérés, originaux dans `_backup-2026-09-08/`) : accent or
-  `#CDA963` → `#6866A7`, bandeau logo et filigrane recolorés par rotation de teinte, 8
-  surlignages jaunes de relecture retirés.
+- Tentative, sur cette passe, de repeindre aussi le dossier de compétences Word hors repo
+  (`~/Business/CV/CS_CONSULTING_CV_2026`) : accent or `#CDA963` → `#6866A7`, logo et filigrane
+  par rotation de teinte, surlignages jaunes retirés, tampon ISO 9001 supprimé. **Annulé** à la
+  3e passe (voir plus bas) : les fichiers du poste ont été remis à l'identique, empreintes
+  vérifiées. Mauvaise piste — on retapait un document qui n'était pas la source.
 
 ### Décisions prises (2e passe)
 - Le CV imprimé suit le thème **clair** du site, pas une palette à lui : une seule identité.
 - Bandeau du CV = dégradé du hero plutôt qu'aplat violet (choix de Stephen sur maquette) —
   fidélité maximale au site, et plus besoin d'un logo dédié au CV.
-- `COMMON["palette"]` (bleu/vert/rouge) reste pour mémoire mais plus rien ne s'en sert.
+- `COMMON["palette"]` (bleu/vert/rouge) ne sert plus à rien ; retirée à la 4e passe.
+
 ### Fait (3e passe — le CV Word rentre dans le repo)
 
 - Le CV Word vivait hors du repo (`~/Business/CV/CS_CONSULTING_CV_2026.doc[x]`), sur un vieux
@@ -63,11 +65,28 @@ entre sessions. État du repo au démarrage :
   installé et le repo tient à ne dépendre que de python3 + chromium.
 
 ### Décisions prises (3e passe)
-- Une seule source pour quatre livrables : site, PDF FR/EN, Word FR/EN. Plus de CV « à part ».
+- Une seule source pour **cinq** livrables : site, PDF FR/EN, Word FR/EN. Plus de CV « à part ».
 - Polices du `.docx` : **Calibri + Consolas** au lieu de Space Grotesk / JetBrains Mono — un
   Word est relu et édité ailleurs ; Calibri est substituée par Carlito à métriques identiques
   sous LibreOffice, là où Segoe UI tombait sur une serif quelconque.
 - Bandeau : la localisation se pose sur une tabulation droite de la ligne `whoami`. Une colonne
   dédiée (ce que le PDF fait en flex) coupait « Île-de-France · Remote » en deux lignes.
 - Le tampon ISO 9001 disparaît de fait avec le vieux template : il n'a jamais appartenu à CS
-  Consulting.
+  Consulting, il venait du dossier de compétences de l'ESN d'origine.
+- Ce qui a coûté du temps : avoir cru que le `.doc` hérité *était* le CV à faire évoluer. Le
+  bon réflexe était de regarder d'où venait le PDF (du repo) et de faire descendre le Word
+  depuis la même source, pas de remonter le PDF vers le Word.
+
+### Fait (4e passe — documentation)
+- README refondu : tableau des cinq livrables, procédure de vérification des CV (`pdfinfo`,
+  rendu LibreOffice, les deux langues), section dédiée à `docx.py` (OOXML sans dépendance,
+  les deux écarts assumés avec le PDF, options nommées imposées par le hook qualité), et
+  historique des palettes abandonnées pour ne pas les réintroduire.
+- `COMMON["palette"]` retirée de `content.py` : plus aucun lecteur depuis la 2e passe. Les
+  hex restent consignés dans le README, section Identité visuelle.
+
+### Décisions prises (4e passe)
+- Le site ne propose **que les PDF** au téléchargement. Le `.docx` est un livrable d'envoi
+  direct (sourcing, ESN qui réclament un Word), pas une pièce exposée publiquement.
+- Pas de `.doc` legacy : le générer imposerait LibreOffice comme dépendance du build pour un
+  format que plus personne n'exige. À reconsidérer seulement si un client le demande.
