@@ -3,11 +3,19 @@
 Usage : python3 build/cv.py fr|en  → cv-stephen-casse-<lang>.pdf à la racine du repo."""
 import base64, shutil, subprocess, sys, tempfile
 from pathlib import Path
-from content import COMMON, LANGS
+from content import COMMON, LANGS, THEMES
 
 ROOT = Path(__file__).resolve().parents[1]
 ASSETS = ROOT / "build" / "assets"
-BLUE, GREEN, RED = COMMON["palette"]["blue"], COMMON["palette"]["green"], COMMON["palette"]["red"]
+T = THEMES["light"]
+# Le CV imprimé suit le thème CLAIR du site (graine GTA VI) : mêmes tokens, mêmes accents.
+INK, MUTED, PRIMARY = T["text"], T["muted"], T["primary"]
+ACC1, ACC2 = T["k"][1], T["k"][2]           # violet clair · rosé — remplacent l'ancien vert/rouge
+LOW, OUTLINE, CHIP, HERO = T["low"], T["outline"], T["chip"], T["hero"]
+SOFT, FAINT = "#5b5866", "#7c7889"          # gris de texte dérivés du neutre du thème
+# Bandeau = le dégradé du hero du site, texte encre, logo clair du site (aucun asset dédié).
+BAND_BG, BAND_FG, BAND_ACC, BAND_DIM = HERO, INK, PRIMARY, SOFT
+LOGO = "logo-light.png"
 MONO = "font-family: 'JetBrains Mono', ui-monospace, monospace;"
 ICONS = dict(
     mail='<path d="M3 5h18v14H3z"/><path d="M3 6l9 7 9-7"/>',
@@ -19,7 +27,7 @@ ICONS = dict(
 )
 
 
-def svg(name, color=GREEN, size=11):
+def svg(name, color=ACC1, size=11):
     return (f'<svg width="{size}" height="{size}" viewBox="0 0 24 24" fill="none" stroke="{color}" stroke-width="1.8" '
             f'stroke-linecap="round" stroke-linejoin="round" style="flex: none;">{ICONS[name]}</svg>')
 
@@ -50,26 +58,26 @@ def header(L, logo):
   <div class="id"><div class="whoami">~/cs-consulting $ whoami</div>
     <div class="name">{COMMON['name']} <span>· {COMMON['alias']}</span></div>
     <div class="title">{L['title']} <span>— {L['subtitle']}</span></div></div>
-  <div class="loc">{svg('pin', GREEN, 12)}{L['location']}</div>
+  <div class="loc">{svg('pin', BAND_ACC, 12)}{L['location']}</div>
 </div><div class="strip">{contact}</div>"""
 
 
 def page1(L, logo):
     u = L["ui"]
-    facts = "".join(f'<div class="card fact" style="border-top: 3px solid {GREEN if i % 2 == 0 else RED};"><div class="n">{k}</div><div class="l">{v}</div></div>' for i, (k, v) in enumerate(L["facts"]))
+    facts = "".join(f'<div class="card fact" style="border-top: 3px solid {PRIMARY if i % 2 == 0 else ACC2};"><div class="n">{k}</div><div class="l">{v}</div></div>' for i, (k, v) in enumerate(L["facts"]))
     return f"""<div class="pg">{header(L, logo)}
 <div class="body">
   <div class="pitch">{L['pitch']}</div>
   <div class="facts">{facts}</div>
   <div><div class="h2">// {u['sec']['xp']}</div><div class="stack">{''.join(xp_block(x) for x in L['xp'][:3])}</div></div>
 </div>
-<div class="foot"><span>stephen-casse.cv — {u['page']} 1/2</span><span style="color: {GREEN};">● {L['available']}</span></div></div>"""
+<div class="foot"><span>stephen-casse.cv — {u['page']} 1/2</span><span style="color: {PRIMARY};">● {L['available']}</span></div></div>"""
 
 
 def page2(L, logo):
     u = L["ui"]
     skills = "".join(f'<div class="sk"><div class="k">{k}</div><div class="tags">{"".join(f"<span class=\"tag\">{t.strip()}</span>" for t in v.split(","))}</div></div>' for k, v in L["skills"])
-    projects = "".join(card(f'<div class="pt">{t}</div><div class="ps">{s}</div><div class="pd">{d}</div>', f"border-left: 3px solid {GREEN if i % 2 == 0 else RED};")
+    projects = "".join(card(f'<div class="pt">{t}</div><div class="ps">{s}</div><div class="pd">{d}</div>', f"border-left: 3px solid {PRIMARY if i % 2 == 0 else ACC2};")
                        for i, (t, s, d, _u) in enumerate(L["projects"]))
     edu = "".join(f'<div class="ed"><span>{y}</span>{t}</div>' for y, t in L["edu"])
     langs = "".join(f'<div><b>{l}</b> — {n}</div>' for l, n in L["langs"])
@@ -90,39 +98,39 @@ def page2(L, logo):
 
 CSS = f"""
 @page {{ size: 794px 1123px; margin: 0; }}
-body {{ margin: 0; background: #fff; color: {BLUE}; font-family: 'Space Grotesk', 'Segoe UI', sans-serif; font-size: 10.5px; line-height: 1.45; }}
+body {{ margin: 0; background: #fff; color: {INK}; font-family: 'Space Grotesk', 'Segoe UI', sans-serif; font-size: 10.5px; line-height: 1.45; }}
 .pg {{ width: 794px; height: 1123px; position: relative; overflow: hidden; page-break-after: always; box-sizing: border-box; }} .pg:last-child {{ page-break-after: auto; }}
 ul {{ margin: 0; padding-left: 16px; }} li {{ margin: 0 0 4px 0; }} b {{ font-weight: 700; }}
-.band {{ background: {BLUE}; color: #fff; padding: 30px 40px 24px 40px; display: flex; align-items: center; gap: 22px; }}
-.band.small {{ padding: 16px 40px; gap: 12px; }} .name2 {{ font-size: 15px; font-weight: 700; }} .pg2 {{ margin-left: auto; {MONO} font-size: 9.5px; color: {GREEN}; }}
-.id {{ flex: 1; display: flex; flex-direction: column; gap: 4px; }} .whoami {{ {MONO} font-size: 9.5px; color: {GREEN}; }}
-.name {{ font-size: 30px; font-weight: 700; line-height: 1; letter-spacing: -0.02em; }} .name span {{ color: #9c9ca8; font-weight: 500; }}
-.title {{ font-size: 12.5px; font-weight: 600; color: {GREEN}; }} .title span {{ color: #b8b8c4; font-weight: 500; }}
-.loc {{ display: flex; align-items: center; gap: 5px; {MONO} font-size: 9.5px; color: #b8b8c4; white-space: nowrap; align-self: flex-start; margin-top: 1px; }}
-.strip {{ background: #f3f3f6; border-bottom: 1px solid #e1e1e6; padding: 8px 40px; display: flex; justify-content: space-between; gap: 8px; font-size: 9.5px; color: #4a4a58; }}
+.band {{ background: {BAND_BG}; color: {BAND_FG}; padding: 30px 40px 24px 40px; display: flex; align-items: center; gap: 22px; }}
+.band.small {{ padding: 16px 40px; gap: 12px; }} .name2 {{ font-size: 15px; font-weight: 700; }} .pg2 {{ margin-left: auto; {MONO} font-size: 9.5px; color: {BAND_ACC}; }}
+.id {{ flex: 1; display: flex; flex-direction: column; gap: 4px; }} .whoami {{ {MONO} font-size: 9.5px; color: {BAND_ACC}; }}
+.name {{ font-size: 30px; font-weight: 700; line-height: 1; letter-spacing: -0.02em; }} .name span {{ color: {BAND_DIM}; font-weight: 500; }}
+.title {{ font-size: 12.5px; font-weight: 600; color: {BAND_ACC}; }} .title span {{ color: {BAND_DIM}; font-weight: 500; }}
+.loc {{ display: flex; align-items: center; gap: 5px; {MONO} font-size: 9.5px; color: {BAND_DIM}; white-space: nowrap; align-self: flex-start; margin-top: 1px; }}
+.strip {{ background: {LOW}; border-bottom: 1px solid {OUTLINE}; padding: 8px 40px; display: flex; justify-content: space-between; gap: 8px; font-size: 9.5px; color: {MUTED}; }}
 .ct {{ display: inline-flex; align-items: center; gap: 5px; white-space: nowrap; }}
 .body {{ padding: 18px 40px 0 40px; display: flex; flex-direction: column; gap: 16px; }}
-.pitch {{ font-size: 12.5px; line-height: 1.55; color: #2d2c38; }}
+.pitch {{ font-size: 12.5px; line-height: 1.55; color: {INK}; }}
 .facts {{ display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }}
-.card {{ border: 1px solid #e1e1e6; border-radius: 8px; padding: 12px 14px; background: #fff; display: flex; flex-direction: column; gap: 2px; }}
-.fact .n {{ {MONO} font-size: 18px; font-weight: 600; }} .fact .l {{ font-size: 9px; color: #5a5a68; }}
-.h2 {{ {MONO} font-size: 10px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: {GREEN}; margin: 0 0 8px 0; }}
+.card {{ border: 1px solid {OUTLINE}; border-radius: 8px; padding: 12px 14px; background: #fff; display: flex; flex-direction: column; gap: 2px; }}
+.fact .n {{ {MONO} font-size: 18px; font-weight: 600; }} .fact .l {{ font-size: 9px; color: {SOFT}; }}
+.h2 {{ {MONO} font-size: 10px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: {T["mono"]}; margin: 0 0 8px 0; }}
 .stack {{ display: flex; flex-direction: column; gap: 10px; }}
-.row {{ display: flex; justify-content: space-between; align-items: baseline; gap: 10px; }} .co {{ font-weight: 700; font-size: 12.5px; }} .when {{ {MONO} font-size: 9px; color: {RED}; white-space: nowrap; }}
-.role {{ font-size: 10.5px; font-weight: 600; color: #4a4a58; }} .role span {{ font-weight: 400; color: #8a8a96; }} .ctx {{ font-size: 9.8px; color: #6b6b78; margin: 3px 0 5px 0; }}
+.row {{ display: flex; justify-content: space-between; align-items: baseline; gap: 10px; }} .co {{ font-weight: 700; font-size: 12.5px; }} .when {{ {MONO} font-size: 9px; color: {ACC2}; white-space: nowrap; }}
+.role {{ font-size: 10.5px; font-weight: 600; color: {PRIMARY}; }} .role span {{ font-weight: 400; color: {FAINT}; }} .ctx {{ font-size: 9.8px; color: {SOFT}; margin: 3px 0 5px 0; }}
 .grid2 {{ display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 18px; }} .grid2.tight {{ gap: 8px; }}
 .grid3 {{ display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }} .col {{ display: flex; flex-direction: column; gap: 4px; font-size: 9.8px; }}
 .sk {{ display: flex; flex-direction: column; gap: 5px; }} .k {{ font-weight: 700; font-size: 10px; }} .tags {{ display: flex; flex-wrap: wrap; gap: 4px; }}
-.tag {{ {MONO} font-size: 8.5px; padding: 2px 6px; border: 1px solid #d7d7dc; border-radius: 3px; color: #4a4a58; white-space: nowrap; }}
-.pt {{ font-weight: 700; font-size: 10.5px; }} .ps {{ {MONO} font-size: 8.5px; color: #6b6b78; }} .pd {{ font-size: 9.6px; color: #4a4a58; }}
-.ed {{ display: flex; gap: 8px; }} .ed span {{ {MONO} color: {RED}; flex: none; }} .q {{ font-style: italic; color: #2d2c38; font-size: 10.5px; }}
-.foot {{ position: absolute; left: 40px; right: 40px; bottom: 22px; display: flex; justify-content: space-between; {MONO} font-size: 8.5px; color: #8a8a96; }}
+.tag {{ {MONO} font-size: 8.5px; padding: 2px 6px; background: {CHIP}; border: 1px solid {OUTLINE}; border-radius: 3px; color: {MUTED}; white-space: nowrap; }}
+.pt {{ font-weight: 700; font-size: 10.5px; }} .ps {{ {MONO} font-size: 8.5px; color: {T["mono"]}; }} .pd {{ font-size: 9.6px; color: {MUTED}; }}
+.ed {{ display: flex; gap: 8px; }} .ed span {{ {MONO} color: {ACC2}; flex: none; }} .q {{ font-style: italic; color: {INK}; font-size: 10.5px; }}
+.foot {{ position: absolute; left: 40px; right: 40px; bottom: 22px; display: flex; justify-content: space-between; {MONO} font-size: 8.5px; color: {FAINT}; }}
 """
 
 
 def render(lang):
     L = LANGS[lang]
-    logo = data_uri(ASSETS / "logo-cv.png")
+    logo = data_uri(ASSETS / LOGO)
     return f"""<!doctype html><html lang="{lang}"><head><meta charset="utf-8"><title>CV {COMMON['name']} — {L['title']}</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap">
 <style>{CSS}</style></head><body>{page1(L, logo)}{page2(L, logo)}</body></html>"""

@@ -1,20 +1,9 @@
 # -*- coding: utf-8 -*-
 """Génère index.html (FR + EN, clair + sombre) depuis content.py. Aucune dépendance."""
 from pathlib import Path
-from content import COMMON, LANGS
+from content import COMMON, LANGS, THEMES
 
 ROOT = Path(__file__).resolve().parents[1]
-THEMES = {
-    # clair = graine GTA VI (matugen sur le fond du thème 6), sombre = identité Indigo #8b93f8
-    "light": dict(bg="#fdf7ff", low="#f7f2f9", card="#ffffff", text="#1c1b20", muted="#484550",
-                  primary="#6866A7", on_primary="#ffffff", outline="#cac4d2", chip="#f2ecf3", chip_fg="#484550",
-                  mono="#7a68b4", hero="linear-gradient(135deg, #f7f2f9 0%, #ece0f2 55%, #f9e3ee 100%)",
-                  k=["#6866A7", "#9775BA", "#A86F9F", "#655164"], kb=["#6866A7", "#9775BA", "#C898C2", "#655164"]),
-    "dark": dict(bg="#131319", low="#1b1b21", card="#1f1f25", text="#e4e1ea", muted="#c1c3f0",
-                 primary="#8b93f8", on_primary="#000141", outline="#464652", chip="#292930", chip_fg="#e4e1ea",
-                 mono="#8b93f8", hero="linear-gradient(135deg, #131319 0%, #1b1b2b 60%, #1f1f25 100%)",
-                 k=["#8b93f8", "#6fd3a6", "#e2b25f", "#C793E0"], kb=["#8b93f8", "#6fd3a6", "#e2b25f", "#C793E0"]),
-}
 ICONS = dict(
     mail='<path d="M3 5h18v14H3z"/><path d="M3 6l9 7 9-7"/>',
     link='<path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1.5 1.5"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/>',
