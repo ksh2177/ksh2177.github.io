@@ -51,5 +51,23 @@ entre sessions. État du repo au démarrage :
 - Bandeau du CV = dégradé du hero plutôt qu'aplat violet (choix de Stephen sur maquette) —
   fidélité maximale au site, et plus besoin d'un logo dédié au CV.
 - `COMMON["palette"]` (bleu/vert/rouge) reste pour mémoire mais plus rien ne s'en sert.
-- Reste à trancher : le tampon **ISO 9001 (Lloyd's Register)** en pied du dossier Word vient du
-  template de l'ESN d'origine — il n'appartient pas à CS Consulting et devrait sauter.
+### Fait (3e passe — le CV Word rentre dans le repo)
+
+- Le CV Word vivait hors du repo (`~/Business/CV/CS_CONSULTING_CV_2026.doc[x]`), sur un vieux
+  template ESN 5 pages hérité (or `#CDA963` sur marine, tampon ISO 9001 d'une autre société,
+  surlignages jaunes de relecture). Repeindre ce document était une impasse : il ne partageait
+  ni le contenu ni la palette du reste. Il est **abandonné** (laissé intact sur le poste).
+- `build/docx.py` génère désormais `cv-stephen-casse-{fr,en}.docx` depuis `content.py` :
+  même contenu, même modèle 2 pages, même palette que le PDF. Ajouté à `build.sh`.
+- OOXML écrit à la main (zip + XML), **aucune dépendance** ajoutée — `python-docx` n'est pas
+  installé et le repo tient à ne dépendre que de python3 + chromium.
+
+### Décisions prises (3e passe)
+- Une seule source pour quatre livrables : site, PDF FR/EN, Word FR/EN. Plus de CV « à part ».
+- Polices du `.docx` : **Calibri + Consolas** au lieu de Space Grotesk / JetBrains Mono — un
+  Word est relu et édité ailleurs ; Calibri est substituée par Carlito à métriques identiques
+  sous LibreOffice, là où Segoe UI tombait sur une serif quelconque.
+- Bandeau : la localisation se pose sur une tabulation droite de la ligne `whoami`. Une colonne
+  dédiée (ce que le PDF fait en flex) coupait « Île-de-France · Remote » en deux lignes.
+- Le tampon ISO 9001 disparaît de fait avec le vieux template : il n'a jamais appartenu à CS
+  Consulting.

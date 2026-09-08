@@ -10,15 +10,22 @@ Refondu le 08/09/2026 (fin du thème « CRT terminal » Superdesign).
 build/content.py     # LE contenu (FR + EN) + LES palettes (thèmes clair/sombre) — source unique
 build/site.py        # génère index.html (deux langues + deux thèmes dans le même fichier)
 build/cv.py          # génère cv-stephen-casse-<fr|en>.pdf (2 pages A4, Chromium headless)
+build/docx.py        # génère cv-stephen-casse-<fr|en>.docx (même CV, éditable — OOXML à la main)
 build/build.sh       # régénère tout
 build/assets/        # logos sources (clair GTA VI, sombre Indigo — le CV réutilise le clair)
 index.html           # GÉNÉRÉ — ne pas éditer à la main
 assets/              # GÉNÉRÉ — logos servis par le site
-cv-stephen-casse-fr.pdf, cv-stephen-casse-en.pdf   # GÉNÉRÉS
+cv-stephen-casse-{fr,en}.pdf, cv-stephen-casse-{fr,en}.docx   # GÉNÉRÉS
 ```
 
 Aucun build côté GitHub Pages : le HTML généré est commité. Dépendances locales : `python3`,
 `chromium` (pour les PDF). Polices Google Fonts (Space Grotesk + JetBrains Mono).
+
+Le `.docx` est le **même CV, éditable**, pour les plateformes de sourcing et les ESN qui
+réclament un Word. Il est écrit en OOXML directement par `build/docx.py` — aucune dépendance,
+même parti pris que `site.py` pour le HTML. Il compose en **Calibri + Consolas** (présentes
+sous Word, substituées par Carlito à métriques identiques sous LibreOffice) là où le PDF utilise
+Space Grotesk + JetBrains Mono, qu'un destinataire n'aurait pas.
 
 ## Modifier le contenu
 
