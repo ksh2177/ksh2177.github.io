@@ -31,3 +31,25 @@ entre sessions. État du repo au démarrage :
 - Page Notion supprimée par Stephen ; le site GitHub devient la porte d'entrée unique.
 - Chromium sous firejail n'écrit que dans `/tmp` : les PDF passent par un dossier temporaire.
 - AWS retiré partout (jamais pratiqué) ; Azure/Terraform datés « BPCE Lease 2021 ».
+
+### Fait (2e passe — palette)
+- Les CV PDF vivaient encore sur l'ancienne palette CS Consulting (bleu nuit `#373643`, vert
+  `#18cb96`, rouge `#ff4b4b`) alors que le site refondu le matin tourne sur la graine GTA VI :
+  qui ouvrait le site puis téléchargeait le CV voyait deux identités. Corrigé (`fca7336`).
+- `THEMES` (clair + sombre) remonte dans `content.py` : source unique de palette. `site.py` en
+  sort les deux thèmes, `cv.py` ne consomme que le clair. `index.html` inchangé au bit près.
+- `cv.py` ne code plus aucune couleur en dur : bandeau = dégradé du hero du site, accents
+  `#6866A7` / `#9775BA` (titres, icônes, `whoami`) et `#A86F9F` (dates, liserés), tags sur le
+  fond chip `#f2ecf3`. Le CV réutilise `logo-light.png` : `logo-cv.png` supprimé.
+- Hors repo, même passe sur le dossier de compétences Word `~/Business/CV/CS_CONSULTING_CV_2026`
+  (`.docx` → `.doc` + `.pdf` régénérés, originaux dans `_backup-2026-09-08/`) : accent or
+  `#CDA963` → `#6866A7`, bandeau logo et filigrane recolorés par rotation de teinte, 8
+  surlignages jaunes de relecture retirés.
+
+### Décisions prises (2e passe)
+- Le CV imprimé suit le thème **clair** du site, pas une palette à lui : une seule identité.
+- Bandeau du CV = dégradé du hero plutôt qu'aplat violet (choix de Stephen sur maquette) —
+  fidélité maximale au site, et plus besoin d'un logo dédié au CV.
+- `COMMON["palette"]` (bleu/vert/rouge) reste pour mémoire mais plus rien ne s'en sert.
+- Reste à trancher : le tampon **ISO 9001 (Lloyd's Register)** en pied du dossier Word vient du
+  template de l'ESN d'origine — il n'appartient pas à CS Consulting et devrait sauter.
