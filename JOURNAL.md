@@ -90,3 +90,54 @@ entre sessions. État du repo au démarrage :
   direct (sourcing, ESN qui réclament un Word), pas une pièce exposée publiquement.
 - Pas de `.doc` legacy : le générer imposerait LibreOffice comme dépendance du build pour un
   format que plus personne n'exige. À reconsidérer seulement si un client le demande.
+
+## 🎯 12 SEPTEMBRE 2026 — le CV rejoint le positionnement LinkedIn
+
+Séance ouverte par une comparaison CV ↔ profil LinkedIn, trois jours après la refonte
+intégrale du profil (11/09). Verdict : pas une contradiction, une **omission asymétrique** —
+chaque support disait vrai, aucun ne disait tout.
+
+### Fait
+- `df78dc0` — alignement complet du contenu (`build/content.py`) : CS Consulting devient la
+  première expérience (arc Astre Solutions → Co&Sta → Norteo, puis le produit, puis les
+  20 600 tests) ; BPCE IT renversé (le projet est le service de consultation des logs,
+  ~1 200 serveurs et les quinze DSI de la branche ; la stack Apache portable est ce qui le
+  rend déployable) ; Amundi gagne la migration SAS menée de bout en bout ; titre, pitch et
+  tuiles portent la vérification ; familles de compétences « Vérification » et « IA & agents ».
+- Exactitude : entrée chez Amundi ramenée à **nov. 2017** (le trou de douze mois affiché
+  n'existait pas — enchaînement à une semaine d'Euler Hermes) ; chevauchement Amundi / BPCE IT
+  supprimé ; « 11 ans » au lieu de « 10 ans » ; « 80 % de temps gagné » retiré faute de preuve ;
+  citations sans auteur supprimées ; OpenShift retiré (pas en production) ; « AP2 » écrit en
+  toutes lettres ; entité unifiée sur BPCE IT.
+- Rendu : ligne de couverture ajoutée au PDF et au Word, colonne citations conditionnelle,
+  projets sur trois colonnes, répartition 2 blocs page 1 / 1 page 2. `docx.py` : entités HTML
+  décodées, saut de page forcé retiré, marges resserrées.
+- `Perso/notes` `092ba29` — `docs/ksh-carriere/matiere.md`, l'inventaire de carrière privé qui
+  alimente désormais les trois supports ; les cinq notes LinkedIn de juin 2025 marquées périmées.
+
+### Décisions prises
+- **Un inventaire unique précède les supports.** La divergence ne venait pas d'un défaut de
+  mémoire mais de son absence : le CV ignorait le service de logs, la migration SAS et
+  CS Consulting ; LinkedIn ignorait la bascule PSI et le Control-M as code. L'inventaire vit
+  dans `Perso/notes`, pas ici — ce dépôt pousse sur GitHub Pages, donc en public.
+- **Règle d'exposition.** Ne jamais publier la topologie de ce qui tourne : adresses, noms
+  d'hôtes, versions en exploitation, réseau. Se publient sans coût les décisions, les principes,
+  les méthodes, les effets. Conséquences immédiates : la fiche « Hub » est retirée (elle
+  décrivait l'infra vivante) et le homelab est daté « état 2025 » — un montage démantelé
+  enseigne sans rien ouvrir, c'est ce qui en fait une bonne pièce publique.
+- **Le CV n'est pas cumulatif : une fenêtre glissante plus une ligne d'horizon.** Trois blocs
+  détaillés (CS Consulting, BPCE IT, Amundi), le reste en une ligne de couverture qui garde les
+  dates et les noms. Le coût d'une ligne est constant, celui d'un bloc croît avec la carrière :
+  ce qui vieillit passe du bloc à la ligne, jamais du bloc au néant. e-Crea retirée du CV, gardée
+  sur LinkedIn où la place est gratuite.
+- **Un chiffre affiché engage la chronologie.** Annoncer onze ans et ne montrer que 2020 → 2026
+  recrée l'incohérence « 8 ans / 10 ans » corrigée le 08/09. Soit la couverture suit le compteur,
+  soit le compteur descend.
+
+### Reste à faire
+- Corriger LinkedIn : l'entrée Amundi y affiche encore nov. 2018.
+- Trancher les questions ouvertes de `matiere.md` : la migration Oracle Financials / OBIEE
+  Solaris → SUSE (réalisation ou accompagnement ?) et les chiffres du service de logs
+  (~1 200 / 15 DSI contre 800-900 / 10 au deck CODIR de février).
+- L'écrit public sur la vérification — la pièce qui manque pour que le positionnement tienne
+  par lui-même, et la première entrée de la section Sélection le jour où elle existe.
