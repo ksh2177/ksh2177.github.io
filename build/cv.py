@@ -69,29 +69,34 @@ def page1(L, logo):
 <div class="body">
   <div class="pitch">{L['pitch']}</div>
   <div class="facts">{facts}</div>
-  <div><div class="h2">// {u['sec']['xp']}</div><div class="stack">{''.join(xp_block(x) for x in L['xp'][:3])}</div></div>
+  <div><div class="h2">// {u['sec']['xp']}</div><div class="stack">{''.join(xp_block(x) for x in L['xp'][:2])}</div></div>
 </div>
 <div class="foot"><span>stephen-casse.cv — {u['page']} 1/2</span><span style="color: {PRIMARY};">● {L['available']}</span></div></div>"""
 
 
 def page2(L, logo):
     u = L["ui"]
+    tail = "".join(xp_block(x) for x in L["xp"][2:])
+    rest = f'<div class="stack">{tail}</div><div class="more">{L["xp_more"]}</div>' if tail else ""
     skills = "".join(f'<div class="sk"><div class="k">{k}</div><div class="tags">{"".join(f"<span class=\"tag\">{t.strip()}</span>" for t in v.split(","))}</div></div>' for k, v in L["skills"])
     projects = "".join(card(f'<div class="pt">{t}</div><div class="ps">{s}</div><div class="pd">{d}</div>', f"border-left: 3px solid {PRIMARY if i % 2 == 0 else ACC2};")
                        for i, (t, s, d, _u) in enumerate(L["projects"]))
     edu = "".join(f'<div class="ed"><span>{y}</span>{t}</div>' for y, t in L["edu"])
     langs = "".join(f'<div><b>{l}</b> — {n}</div>' for l, n in L["langs"])
     quotes = "".join(f'<div class="q">« {q} »</div>' for q in L["quotes"])
+    qsec = u["sec"]["quotes"]
+    quotes_col = f'<div><div class="h2">// {qsec}</div><div class="col">{quotes}</div></div>' if quotes else ""
+    grid = "grid3" if quotes else "grid2"
     return f"""<div class="pg"><div class="band small"><img src="{logo}" style="width: 44px; height: auto;"><span class="name2">{COMMON['name']}</span>
-  <span class="pg2">{L['title'].lower().replace(' ', '-')} · {u['page']} 2/2</span></div>
+  <span class="pg2">{L['title'].lower().replace(' / ', '-').replace(' ', '-')} · {u['page']} 2/2</span></div>
 <div class="body">
-  <div class="stack">{''.join(xp_block(x) for x in L['xp'][3:])}</div>
+  {rest}
   <div><div class="h2">// {u['sec']['skills']}</div><div class="grid2">{skills}</div></div>
-  <div><div class="h2">// {u['sec']['projects']}</div><div class="grid2 tight">{projects}</div></div>
-  <div class="grid3">
+  <div><div class="h2">// {u['sec']['projects']}</div><div class="grid3 tight">{projects}</div></div>
+  <div class="{grid}">
     <div><div class="h2">// {u['sec']['edu']}</div><div class="col">{edu}</div></div>
     <div><div class="h2">// {u['sec']['langs']}</div><div class="col">{langs}</div></div>
-    <div><div class="h2">// {u['sec']['quotes']}</div><div class="col">{quotes}</div></div>
+    {quotes_col}
   </div>
 </div></div>"""
 
@@ -114,6 +119,7 @@ ul {{ margin: 0; padding-left: 16px; }} li {{ margin: 0 0 4px 0; }} b {{ font-we
 .facts {{ display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }}
 .card {{ border: 1px solid {OUTLINE}; border-radius: 8px; padding: 12px 14px; background: #fff; display: flex; flex-direction: column; gap: 2px; }}
 .fact .n {{ {MONO} font-size: 18px; font-weight: 600; }} .fact .l {{ font-size: 9px; color: {SOFT}; }}
+.more {{ font-size: 9.5px; color: {FAINT}; margin-top: 10px; }}
 .h2 {{ {MONO} font-size: 10px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: {T["mono"]}; margin: 0 0 8px 0; }}
 .stack {{ display: flex; flex-direction: column; gap: 10px; }}
 .row {{ display: flex; justify-content: space-between; align-items: baseline; gap: 10px; }} .co {{ font-weight: 700; font-size: 12.5px; }} .when {{ {MONO} font-size: 9px; color: {ACC2}; white-space: nowrap; }}

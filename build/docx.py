@@ -6,7 +6,7 @@ OOXML écrit à la main : aucune dépendance (même parti pris que site.py pour 
 Même contenu et même palette que le PDF — le .docx est la version ÉDITABLE, pour les
 plateformes de sourcing et les ESN qui réclament un Word.
 """
-import re, sys, zipfile
+import html, re, sys, zipfile
 from pathlib import Path
 from content import COMMON, LANGS, THEMES
 
@@ -23,13 +23,13 @@ SOFT, FAINT = "5B5866", "7C7889"
 # et Consolas pour le monospace.
 SANS, MONO = "Calibri", "Consolas"
 
-PAGE_W, MARGIN = 11906, 680          # A4 en twips, marges 1,2 cm
+PAGE_W, MARGIN = 11906, 540          # A4 en twips, marges 0,95 cm
 BODY_W = PAGE_W - 2 * MARGIN         # 10546
 IDENT_W = BODY_W - 1400 - 460        # largeur utile de la cellule identité du bandeau
 
 
 def esc(t):
-    return t.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+    return html.escape(html.unescape(t), quote=False)
 
 
 def rpr(**o):
@@ -128,7 +128,7 @@ def image(px_w, px_h, rid="rId4"):
             f"</a:graphicData></a:graphic></wp:inline></w:drawing></w:r>")
 
 
-def h2(label, before=130):
+def h2(label, before=90):
     return para(run("// ", color=ACC1, font=MONO, sz=18, b=True)
                 + run(label.upper(), color=MONOC, font=MONO, sz=18, b=True, spacing=16),
                 before=before, after=80, keep=True)
@@ -224,11 +224,14 @@ def bottom_block(L):
     langs = "".join(para(run(l, b=True, sz=16, color=INK) + run(f" — {n}", sz=16, color=MUTED), after=50)
                     for l, n in L["langs"])
     quotes = "".join(para(run(f"« {q} »", i=True, sz=16, color=INK), after=60) for q in L["quotes"])
-    w = (BODY_W - 600) // 3
     head = lambda k: h2(u[k], before=0)
-    col = lambda k, body: cell(head(k) + body, w)
-    return table([col("edu", edu) + cell("", 300) + col("langs", langs) + cell("", 300) + col("quotes", quotes)],
-                 [w, 300, w, 300, w])
+    col = lambda k, body, w: cell(head(k) + body, w)
+    if quotes:
+        w = (BODY_W - 600) // 3
+        return table([col("edu", edu, w) + cell("", 300) + col("langs", langs, w)
+                      + cell("", 300) + col("quotes", quotes, w)], [w, 300, w, 300, w])
+    w = (BODY_W - 300) // 2
+    return table([col("edu", edu, w) + cell("", 300) + col("langs", langs, w)], [w, 300, w])
 
 
 def document(L):
@@ -238,12 +241,12 @@ def document(L):
             + para(rich(L["pitch"], sz=21, color=INK), after=180, line=276)
             + facts_block(L)
             + h2(u["sec"]["xp"])
-            + "".join(xp_block(x) for x in L["xp"][:3])
-            + '<w:p><w:r><w:br w:type="page"/></w:r></w:p>'
-            + "".join(xp_block(x) for x in L["xp"][3:])
+            + "".join(xp_block(x) for x in L["xp"][:2])
+            + "".join(xp_block(x) for x in L["xp"][2:])
+            + para(run(L["xp_more"], sz=16, color=MUTED), before=60, after=120)
             + h2(u["sec"]["skills"]) + skills_block(L)
             + h2(u["sec"]["projects"]) + projects_block(L)
-            + spacer(220) + bottom_block(L))
+            + spacer(80) + bottom_block(L))
     sect = (f'<w:sectPr><w:pgSz w:w="{PAGE_W}" w:h="16838"/>'
             f'<w:pgMar w:top="{MARGIN}" w:right="{MARGIN}" w:bottom="{MARGIN}" w:left="{MARGIN}"'
             f' w:header="0" w:footer="0" w:gutter="0"/></w:sectPr>')
