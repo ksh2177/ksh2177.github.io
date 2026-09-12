@@ -181,3 +181,32 @@ biais d'omission a donc frappé une quatrième fois dans la même journée.
   interligne et espacements ; dans le PDF (pages fixes) la hauteur ne se récupère pas, elle se
   **redistribue** — une expérience bascule en page 2, ou une grille passe de deux à trois
   colonnes.
+
+### Suite — la page LinkedIn CS Consulting et les deux bannières
+
+Le chantier CV a débordé sur la présence LinkedIn : page entreprise CS Consulting refaite de bout
+en bout (slogan, descriptif, 18 spécialisations, services, localisation) et deux bannières
+générées depuis l'identité du site.
+
+- `build/bannieres.py` — page entreprise 1128 × 191 et profil personnel 1584 × 396, rendues en 2×,
+  palette et logo lus dans `content.py`. Les PNG ne sont pas commités : ils se régénèrent.
+  Documenté dans le README.
+
+### Décisions prises (bannières)
+
+- **Ne pas redire ce que la page affiche déjà.** L'avatar LinkedIn porte le logo : le répéter dans
+  la bannière faisait doublon, il n'en reste que les couleurs. Même raisonnement sur le profil, où
+  LinkedIn affiche nom et titre juste en dessous — la bannière n'y garde que les preuves chiffrées.
+- **La palette vient du logo, mesurée sur le fichier** (`#30303c` 79 %, `#60609c` 18 %, `#906cb4`
+  4 %), pas reproduite à l'œil. Le pourcentage de pixels donne aussi la hiérarchie : l'anthracite
+  est la dominante, le violet un accent.
+- **Réserver la zone de l'avatar.** Il déborde sur la bannière en bas à gauche ; tout ce qui s'y
+  trouve est masqué. C'est ce qui coupait « Automatisation » sur l'ancienne bannière de profil.
+- **Juger l'image à la taille où elle est affichée.** LinkedIn rend la bannière à environ la moitié
+  de sa taille source : un texte de 12 px y devient 6 px. Contrôle désormais systématique — réduire
+  le PNG au quart avant de le regarder. Même famille d'erreur que `pdfinfo` sur le CV : un contrôle
+  qui ne reproduit pas les conditions réelles ne contrôle rien.
+- **Un indicateur doit répondre à « et alors ? ».** « 1 standard » ne disait rien ; « 1 200
+  serveurs » pouvait décrire un exécutant. Chaque légende porte maintenant le verbe qui distingue —
+  conçu, défini, adopté. « Pilote groupe » a remplacé « 1 standard » : c'est la réalisation la plus
+  forte du dossier, et elle n'apparaissait sur aucun support.
