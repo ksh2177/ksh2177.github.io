@@ -31,17 +31,23 @@ body {{ margin: 0; width: {w}px; height: {h}px; overflow: hidden;
 {extra}</style></head><body>{body}</body></html>"""
 
 
+# Palette du logo (mesurée sur logo-light.png) : l'avatar de la page porte déjà le logo,
+# la bannière n'en reprend que les couleurs — le répéter ferait doublon à l'écran.
+LOGO_INK, LOGO_BLUE, LOGO_VIOLET = "#30303c", "#60609c", "#906cb4"
+
+
 def page_entreprise():
-    body = f"""<div style="display:flex; align-items:center; gap:38px; padding:0 60px; width:100%;">
-  <img src="{LOGO}" style="height:120px; width:auto; flex:none;">
-  <div style="display:flex; flex-direction:column; gap:10px;">
-    <div style="font-size:32px; font-weight:700; letter-spacing:-0.02em; line-height:1.12;
-                white-space:nowrap;">L'IA qui vous fait gagner du temps — et qui le prouve.</div>
-    <div style="font-family:{MONO}; font-size:15px; color:{T['primary']}; letter-spacing:0.04em;">
+    """Sans logo : l'avatar de la page se superpose en bas à gauche et le porte déjà.
+    Le texte démarre à 300 px pour ne pas passer dessous."""
+    fond = f"linear-gradient(135deg, {LOGO_INK} 0%, #3b3b52 52%, #4a4470 100%)"
+    body = f"""<div style="display:flex; flex-direction:column; justify-content:center; gap:11px;
+            padding:0 60px 0 300px; width:100%; height:100%;">
+    <div style="font-size:33px; font-weight:700; letter-spacing:-0.02em; line-height:1.12;
+                color:#f5f3fa; white-space:nowrap;">L'IA qui vous fait gagner du temps — et qui le prouve.</div>
+    <div style="font-family:{MONO}; font-size:15px; color:#b9a9e0; letter-spacing:0.04em;">
       TPE &amp; PME &nbsp;·&nbsp; documents, saisies, suivi &nbsp;·&nbsp; sur mesure</div>
-  </div>
 </div>"""
-    return shell(1128, 191, body)
+    return shell(1128, 191, body, extra=f"body {{ background: {fond}; }}")
 
 
 def profil():
