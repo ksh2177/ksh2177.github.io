@@ -55,23 +55,23 @@ def profil():
     gaspille la surface. Restent les preuves chiffrées. Le quart inférieur gauche est laissé
     vide — la photo de profil le recouvre."""
     # Un chiffre seul ne prouve rien : chaque légende doit répondre à « et alors ? ».
-    faits = [("11 ans", "production bancaire critique<br>Amundi · BPCE · Euler Hermes"),
-             ("Pilote groupe", "plateforme d'automatisation : j'ai défini les normes, elles sont répliquées sur un autre périmètre"),
-             ("1 200 serveurs", "un service que j'ai conçu, utilisé par les 15 DSI de la branche"),
-             ("20 600 tests", "mon SaaS en production : paiements, agrégation bancaire")]
+    faits = [("11 ans", "production bancaire<br>Amundi · BPCE"),
+             ("Pilote groupe", "normes d'automatisation<br>répliquées"),
+             ("1 200 serveurs", "un service que j'ai conçu<br>15 DSI"),
+             ("20 600 tests", "mon SaaS : paiements,<br>agrégation bancaire")]
     cartes = "".join(
         f"""<div style="background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.13);
-             border-top:3px solid {c}; border-radius:16px; padding:22px 22px; flex:1;
-             display:flex; flex-direction:column; justify-content:flex-start;">
-          <div style="font-family:{MONO}; font-size:23px; font-weight:600; color:#f5f3fa;
-               letter-spacing:-0.02em; line-height:1.15;">{n}</div>
-          <div style="font-size:12px; color:#b9a9e0; margin-top:7px; line-height:1.4;">{l}</div>
+             border-top:4px solid {c}; border-radius:18px; padding:26px 24px; flex:1;
+             display:flex; flex-direction:column; justify-content:center;">
+          <div style="font-family:{MONO}; font-size:26px; font-weight:600; color:#f5f3fa;
+               letter-spacing:-0.03em; line-height:1.1;">{n}</div>
+          <div style="font-size:19px; color:#c3b5e6; margin-top:10px; line-height:1.35;">{l}</div>
         </div>""" for (n, l), c in zip(faits, ["#8b93f8", "#a98fd8", "#c79ad0", "#60609c"]))
     body = f"""<div style="display:flex; flex-direction:column; width:100%; height:100%;
-            padding:40px 56px 0 56px; gap:30px;">
-  <div style="font-size:38px; font-weight:700; letter-spacing:-0.025em; color:#f5f3fa;
+            padding:38px 56px 0 56px; gap:26px;">
+  <div style="font-size:42px; font-weight:700; letter-spacing:-0.025em; color:#f5f3fa;
               line-height:1.1;">Je mets l'IA en production — et je le prouve.</div>
-  <div style="display:flex; gap:16px; padding-left:372px; align-items:stretch;">{cartes}</div>
+  <div style="display:flex; gap:16px; padding-left:372px; align-items:stretch; flex:1; padding-bottom:46px;">{cartes}</div>
 </div>"""
     fond = f"linear-gradient(120deg, {LOGO_INK} 0%, #3b3b52 48%, #4a4470 100%)"
     return shell(1584, 396, body, extra=f"body {{ align-items: flex-start; background: {fond}; }}")
