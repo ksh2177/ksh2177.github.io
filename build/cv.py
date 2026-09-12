@@ -114,7 +114,7 @@ ul {{ margin: 0; padding-left: 16px; }} li {{ margin: 0 0 4px 0; }} b {{ font-we
 .loc {{ display: flex; align-items: center; gap: 5px; {MONO} font-size: 9.5px; color: {BAND_DIM}; white-space: nowrap; align-self: flex-start; margin-top: 1px; }}
 .strip {{ background: {LOW}; border-bottom: 1px solid {OUTLINE}; padding: 8px 40px; display: flex; justify-content: space-between; gap: 8px; font-size: 9.5px; color: {MUTED}; }}
 .ct {{ display: inline-flex; align-items: center; gap: 5px; white-space: nowrap; }}
-.body {{ padding: 18px 40px 0 40px; display: flex; flex-direction: column; gap: 16px; }}
+.body {{ padding: 18px 40px 46px 40px; display: flex; flex-direction: column; gap: 16px; }}
 .pitch {{ font-size: 12.5px; line-height: 1.55; color: {INK}; }}
 .facts {{ display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }}
 .card {{ border: 1px solid {OUTLINE}; border-radius: 8px; padding: 12px 14px; background: #fff; display: flex; flex-direction: column; gap: 2px; }}
