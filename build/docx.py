@@ -23,7 +23,7 @@ SOFT, FAINT = "5B5866", "7C7889"
 # et Consolas pour le monospace.
 SANS, MONO = "Calibri", "Consolas"
 
-PAGE_W, MARGIN = 11906, 540          # A4 en twips, marges 0,95 cm
+PAGE_W, MARGIN = 11906, 500          # A4 en twips, marges 0,88 cm
 BODY_W = PAGE_W - 2 * MARGIN         # 10546
 IDENT_W = BODY_W - 1400 - 460        # largeur utile de la cellule identité du bandeau
 
@@ -80,7 +80,7 @@ def para(inner="", **o):
 
 def bullet(text, **k):
     return para(run("• ", color=PRIMARY, **k) + rich(text, color=MUTED, sz=18),
-                ind=227, hang=142, after=40, line=240)
+                ind=227, hang=142, after=24, line=232)
 
 
 def cell(paras, w, **o):
@@ -171,7 +171,7 @@ def facts_block(L):
 def xp_block(x):
     out = para(run(x["co"], b=True, sz=22, color=INK)
                + tab() + run(x["when"], color=ACC2, font=MONO, sz=16),
-               tabs=[("right", BODY_W)], before=140, after=30, keep=True)
+               tabs=[("right", BODY_W)], before=110, after=30, keep=True)
     out += para(run(x["role"], b=True, sz=18, color=PRIMARY)
                 + run(f" · {x['where']}", sz=18, color=FAINT), after=30, keep=True)
     if x["ctx"]:
