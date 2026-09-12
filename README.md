@@ -50,13 +50,20 @@ Aucun build côté GitHub Pages : tout est généré ici et commité. Dépendanc
 
 ## Vérifier les CV
 
-Le PDF est composé par Chromium à partir d'un HTML en flex : la mise en page est maîtrisée,
-mais un texte allongé peut déborder de la page 2 sans rien signaler. Le `.docx` est en flux
-Word : c'est lui qui déborde le plus facilement, en poussant le bloc formation / langues /
-citations sur une troisième page.
+Le PDF est composé par Chromium sur des pages de **hauteur fixe** (`@page 794×1123`, `.pg` en
+`overflow: hidden`) : un texte allongé ne repousse rien, il passe **par-dessus le pied de page**
+ou disparaît sous la découpe — et le fichier fait toujours 2 pages. Le `.docx`, lui, est en flux
+Word : il ne chevauche pas, il pousse le bloc formation / langues sur une troisième page.
+
+> ⚠️ **`pdfinfo | grep Pages` ne peut pas détecter le débordement du PDF.** Il reste à 2 quoi
+> qu'il arrive. Le seul contrôle valable est le **rendu image des deux pages**, relu — vécu le
+> 12/09/2026 deux fois : une ligne de renvoi passée sous le pied de page, puis un bloc collé à
+> lui. Le garde-fou `padding-bottom: 46px` sur `.body` réserve désormais la hauteur du pied de
+> page, mais il ne dispense pas de regarder.
 
 ```bash
-pdfinfo cv-stephen-casse-fr.pdf | grep Pages        # attendu : 2
+pdfinfo cv-stephen-casse-fr.pdf | grep Pages        # attendu : 2 — nécessaire, pas suffisant
+pdftoppm -png -r 85 cv-stephen-casse-fr.pdf /tmp/cv # puis RELIRE les deux images
 
 # le .docx, rendu via LibreOffice (outil de contrôle seulement, pas une dépendance du build)
 soffice --headless --convert-to pdf --outdir /tmp cv-stephen-casse-fr.docx
@@ -67,9 +74,12 @@ pdftoppm -png -r 110 /tmp/cv-stephen-casse-fr.pdf /tmp/apercu   # relecture visu
 Faire les deux langues : l'anglais est plus court en moyenne, mais certains libellés (dates,
 localisation) y sont plus longs.
 
-Si une page 3 réapparaît, la hauteur se récupère dans `docx.py` sur les rangées d'espacement
-des blocs *projets* (`spacer`), sur les `after` des cellules de compétences et sur le `before`
-des titres de section — pas en réduisant le corps de texte.
+Si une page 3 réapparaît dans le `.docx`, la hauteur se récupère dans `docx.py` sur les marges
+de page (`MARGIN`), l'interligne des puces (`line`) et leur `after`, le `before` des titres de
+section et des blocs d'expérience — pas en réduisant le corps de texte. Si c'est le **PDF** qui
+déborde, la hauteur ne se récupère pas : elle se redistribue, en déplaçant une expérience de la
+page 1 vers la page 2 (`L['xp'][:2]` / `[2:]` dans `cv.py`) ou en passant une grille de deux à
+trois colonnes.
 
 ## Le CV Word (`build/docx.py`)
 

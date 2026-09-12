@@ -141,3 +141,43 @@ chaque support disait vrai, aucun ne disait tout.
   (~1 200 / 15 DSI contre 800-900 / 10 au deck CODIR de février).
 - L'écrit public sur la vérification — la pièce qui manque pour que le positionnement tienne
   par lui-même, et la première entrée de la section Sélection le jour où elle existe.
+
+### Suite de séance — la matière continue de remonter
+
+Quatre échanges après la livraison, quatre faits que ni le CV ni LinkedIn ne portaient. Le
+biais d'omission a donc frappé une quatrième fois dans la même journée.
+
+- `565f55e` / `6ab15e0` — le service de logs affiche son **usage** : ~200 personnes, DSI métier
+  et exploitation confondues. Un compte de serveurs prouve un déploiement, un compte
+  d'utilisateurs prouve un usage ; et une adoption *des deux côtés* de la frontière de sécurité
+  — ceux à qui la production est interdite et ceux qui l'exploitent — dit ce que « 200
+  utilisateurs » seul ne dit pas.
+- `081dac5` — **le pilote groupe Ansible Automation Platform**, que Stephen désigne lui-même
+  comme le sujet dont il est le plus fier, et qui tenait jusque-là en six mots (« inventaire
+  dynamique »). Premier périmètre du groupe à recevoir la plateforme, livrée nue : modèle
+  d'habilitation instruit, nomenclatures et granularité de déploiement définies, inventaire
+  dérivé de la CMDB *et enrichi* des variables des playbooks, standards présentés en CODIR puis
+  répliqués sur une seconde production applicative par une formation qu'il a menée. C'est le
+  seul endroit du dossier où le travail a été **repris par d'autres équipes sur décision de la
+  hiérarchie**.
+- `528579e` — AAP2 remonte en tête du bloc et les deux sections du service de logs sont
+  réunies. Elles forment une paire causale (le service, puis pourquoi il fallait tout embarquer
+  dans un binaire autonome) : une section intercalée oblige le lecteur à revenir en arrière.
+  L'ordre suit la **cible de mission** — Ansible avant Apache — pas la chronologie.
+- `de49322` — le corps du CV réserve la hauteur du pied de page.
+
+### Décisions prises (suite)
+
+- **Quatre questions contre l'omission**, écrites dans `matiere.md` et à rejouer avant chaque
+  candidature : qu'ai-je reçu nu ou cassé et rendu utilisable ? qu'ai-je normé que d'autres
+  appliquent ? qu'ai-je présenté ou fait arbitrer au-dessus de mon niveau ? qu'est-ce qui tourne
+  encore sans moi ? Elles ont débusqué les quatre morceaux manquants.
+- **`pdfinfo` ne vérifie pas la mise en page du PDF.** Les pages sont à hauteur fixe et `.pg` est
+  en `overflow: hidden` : un contenu trop long chevauche le pied de page ou disparaît, et le
+  compteur reste à 2. Deux occurrences dans la journée, dont une vue par Stephen et non par le
+  contrôle automatique. Correctifs : `padding-bottom: 46px` sur `.body`, et la procédure du
+  README exige désormais la **relecture du rendu image**.
+- **Où récupérer de la hauteur**, selon le format : dans le `.docx` (flux) on resserre marges,
+  interligne et espacements ; dans le PDF (pages fixes) la hauteur ne se récupère pas, elle se
+  **redistribue** — une expérience bascule en page 2, ou une grille passe de deux à trois
+  colonnes.
