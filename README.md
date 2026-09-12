@@ -29,6 +29,7 @@ build/site.py        # génère index.html (deux langues + deux thèmes dans le 
 build/cv.py          # génère cv-stephen-casse-<fr|en>.pdf  (2 pages A4, Chromium headless)
 build/docx.py        # génère cv-stephen-casse-<fr|en>.docx (2 pages A4, OOXML à la main)
 build/build.sh       # régénère tout
+build/bannieres.py   # bannières LinkedIn (page entreprise + profil) — hors build.sh
 build/assets/        # logos sources (clair GTA VI, sombre Indigo — les CV réutilisent le clair)
 index.html           # GÉNÉRÉ — ne pas éditer à la main
 assets/              # GÉNÉRÉ — logos servis par le site
@@ -38,6 +39,21 @@ cv-stephen-casse-{fr,en}.{pdf,docx}   # GÉNÉRÉS
 Aucun build côté GitHub Pages : tout est généré ici et commité. Dépendances locales :
 `python3` et `chromium` (impression des PDF). Le site charge ses polices depuis Google Fonts
 (Space Grotesk + JetBrains Mono).
+
+## Bannières LinkedIn
+
+`build/bannieres.py` produit les deux bannières depuis la même palette et le même logo que le
+site — elles ne peuvent donc pas diverger de l'identité. Elles ne sont pas commitées : on les
+régénère.
+
+```bash
+python3 build/bannieres.py /tmp        # deux PNG rendus en 2x
+```
+
+Formats imposés par LinkedIn : **page entreprise 1128 × 191**, **profil 1584 × 396**. Sur le
+profil, le quart inférieur gauche reste vide : la photo de profil le recouvre, et c'est ce qui
+coupait le texte de l'ancienne bannière. Le rendu est fait en `--force-device-scale-factor=2`
+(ratio identique, netteté sur écran Retina — LinkedIn redimensionne côté serveur).
 
 ## Modifier le contenu
 
