@@ -38,10 +38,10 @@ LOGO_INK, LOGO_BLUE, LOGO_VIOLET = "#30303c", "#60609c", "#906cb4"
 
 def page_entreprise():
     """Sans logo : l'avatar de la page se superpose en bas à gauche et le porte déjà.
-    Le texte démarre à 300 px pour ne pas passer dessous."""
+    Le texte démarre à 244 px : l'avatar s'arrête à ~20 % de la largeur (mesuré au rendu)."""
     fond = f"linear-gradient(135deg, {LOGO_INK} 0%, #3b3b52 52%, #4a4470 100%)"
     body = f"""<div style="display:flex; flex-direction:column; justify-content:center; gap:11px;
-            padding:0 60px 0 300px; width:100%; height:100%;">
+            padding:0 48px 0 244px; width:100%; height:100%;">
     <div style="font-size:33px; font-weight:700; letter-spacing:-0.02em; line-height:1.12;
                 color:#f5f3fa; white-space:nowrap;">L'IA qui vous fait gagner du temps — et qui le prouve.</div>
     <div style="font-family:{MONO}; font-size:15px; color:#b9a9e0; letter-spacing:0.04em;">
