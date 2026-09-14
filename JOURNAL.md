@@ -210,3 +210,33 @@ générées depuis l'identité du site.
   serveurs » pouvait décrire un exécutant. Chaque légende porte maintenant le verbe qui distingue —
   conçu, défini, adopté. « Pilote groupe » a remplacé « 1 standard » : c'est la réalisation la plus
   forte du dossier, et elle n'apparaissait sur aucun support.
+
+## 🖥️ 15 SEPTEMBRE 2026 — une expérience oubliée : le générateur Royal TS
+
+Stephen a relevé, en préparant une recherche de missions, qu'une réalisation BPCE IT manquait à
+tous les supports : le générateur de dossiers dynamiques Royal TS (repo `BPCE-IT/royalts`).
+Deux cents personnes tenaient chacune leur carnet de connexions SSH/RDP sur plus de 1 600
+serveurs, hérité d'exports périmés ; un rôle Ansible sur AAP2 le génère désormais depuis la
+CMDB, trois fois par jour, via le bastion CyberArk. Présenté en CODIR, en prod depuis des mois.
+
+### Fait
+
+- `9f139b0` — bloc « Un terminal, une source de vérité » ajouté au CV FR et EN, en 2e position
+  du bloc BPCE IT (le pilote AAP2 installe la plateforme, ce bloc montre ce qu'on en tire) ;
+  CyberArk (PSM/PSMP) ajouté à la grille Sécurité ; PDF, docx et site régénérés, poussés sur
+  Gitea et GitHub Pages, PDF recopiés dans `~/Business/CV`.
+
+### Décisions prises
+
+- **Le ROI interne (~47 k€/an) n'est pas publié.** C'est une estimation à 4 h/mois/personne,
+  jamais validée par le client. Restent les faits durs : 1 700 serveurs en 18 s, 200
+  utilisateurs, CODIR, usage quotidien.
+- **CyberArk est nommé.** Produit du marché, mot-clé cherché par les recruteurs banque ;
+  ce n'est pas décrire l'architecture d'accès du client.
+- **Tenir les deux pages sans couper de contenu.** Le bloc débordait de cinq lignes sur le
+  pied de page 1. Texte resserré d'une ligne et demie, puis interligne 1,45 → 1,38, police
+  10,5 → 10,3 px, gaps de `.body`/`.stack`/`li` réduits. Contrôle au rendu (bas de page
+  découpé à 110 dpi), pas au nombre de pages : `pdfinfo` disait « 2 pages » alors que le
+  texte passait sous le pied de page.
+- **Le site ne change pas de forme.** Il n'affiche que le premier paragraphe de chaque
+  expérience (choix du 08/09) ; la nouvelle histoire vit dans le CV téléchargeable.
