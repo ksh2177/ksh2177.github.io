@@ -103,9 +103,9 @@ def page2(L, logo):
 
 CSS = f"""
 @page {{ size: 794px 1123px; margin: 0; }}
-body {{ margin: 0; background: #fff; color: {INK}; font-family: 'Space Grotesk', 'Segoe UI', sans-serif; font-size: 10.5px; line-height: 1.45; }}
+body {{ margin: 0; background: #fff; color: {INK}; font-family: 'Space Grotesk', 'Segoe UI', sans-serif; font-size: 10.3px; line-height: 1.38; }}
 .pg {{ width: 794px; height: 1123px; position: relative; overflow: hidden; page-break-after: always; box-sizing: border-box; }} .pg:last-child {{ page-break-after: auto; }}
-ul {{ margin: 0; padding-left: 16px; }} li {{ margin: 0 0 4px 0; }} b {{ font-weight: 700; }}
+ul {{ margin: 0; padding-left: 16px; }} li {{ margin: 0 0 3px 0; }} b {{ font-weight: 700; }}
 .band {{ background: {BAND_BG}; color: {BAND_FG}; padding: 30px 40px 24px 40px; display: flex; align-items: center; gap: 22px; }}
 .band.small {{ padding: 16px 40px; gap: 12px; }} .name2 {{ font-size: 15px; font-weight: 700; }} .pg2 {{ margin-left: auto; {MONO} font-size: 9.5px; color: {BAND_ACC}; }}
 .id {{ flex: 1; display: flex; flex-direction: column; gap: 4px; }} .whoami {{ {MONO} font-size: 9.5px; color: {BAND_ACC}; }}
@@ -114,14 +114,14 @@ ul {{ margin: 0; padding-left: 16px; }} li {{ margin: 0 0 4px 0; }} b {{ font-we
 .loc {{ display: flex; align-items: center; gap: 5px; {MONO} font-size: 9.5px; color: {BAND_DIM}; white-space: nowrap; align-self: flex-start; margin-top: 1px; }}
 .strip {{ background: {LOW}; border-bottom: 1px solid {OUTLINE}; padding: 8px 40px; display: flex; justify-content: space-between; gap: 8px; font-size: 9.5px; color: {MUTED}; }}
 .ct {{ display: inline-flex; align-items: center; gap: 5px; white-space: nowrap; }}
-.body {{ padding: 18px 40px 46px 40px; display: flex; flex-direction: column; gap: 16px; }}
+.body {{ padding: 16px 40px 46px 40px; display: flex; flex-direction: column; gap: 12px; }}
 .pitch {{ font-size: 12.5px; line-height: 1.55; color: {INK}; }}
 .facts {{ display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }}
 .card {{ border: 1px solid {OUTLINE}; border-radius: 8px; padding: 12px 14px; background: #fff; display: flex; flex-direction: column; gap: 2px; }}
 .fact .n {{ {MONO} font-size: 18px; font-weight: 600; }} .fact .l {{ font-size: 9px; color: {SOFT}; }}
 .more {{ font-size: 9.5px; color: {FAINT}; margin-top: 10px; }}
 .h2 {{ {MONO} font-size: 10px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: {T["mono"]}; margin: 0 0 8px 0; }}
-.stack {{ display: flex; flex-direction: column; gap: 10px; }}
+.stack {{ display: flex; flex-direction: column; gap: 8px; }}
 .row {{ display: flex; justify-content: space-between; align-items: baseline; gap: 10px; }} .co {{ font-weight: 700; font-size: 12.5px; }} .when {{ {MONO} font-size: 9px; color: {ACC2}; white-space: nowrap; }}
 .role {{ font-size: 10.5px; font-weight: 600; color: {PRIMARY}; }} .role span {{ font-weight: 400; color: {FAINT}; }} .ctx {{ font-size: 9.8px; color: {SOFT}; margin: 3px 0 5px 0; }}
 .grid2 {{ display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 18px; }} .grid2.tight {{ gap: 8px; }}
