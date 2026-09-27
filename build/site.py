@@ -152,7 +152,7 @@ def render_lang(L, kcount=4):
       <span style="color: var(--k3);">{icon('globe')}<a href="https://{COMMON['site']}" target="_blank" rel="noopener">{COMMON['site']}</a></span></div>
     <div class="cta"><a class="btn" href="cv-stephen-casse-fr.pdf" download>{u['cv_fr']}</a><a class="btn ghost" href="cv-stephen-casse-en.pdf" download>{u['cv_en']}</a></div>
   </div>
-  <div><img class="logo-light" src="assets/logo-cs-light.png" alt="CS Consulting" style="height: auto;"><img class="logo-dark" src="assets/logo-cs-dark.png" alt="CS Consulting" style="height: auto;"></div>
+  <div><img class="logo-light" src="assets/logo-light.png" alt="CS Consulting" style="height: auto;"><img class="logo-dark" src="assets/logo-dark.png" alt="CS Consulting" style="height: auto;"></div>
 </div></section>
 <footer><div class="wrap mono"><span>© 2026 {COMMON['name']} — {COMMON['company']}</span><span>{u['footer_right']}</span></div></footer>
 </div>"""
@@ -172,8 +172,8 @@ def render():
 <meta name="description" content="Stephen Casse, ingénieur DevOps freelance (CS Consulting) : CI/CD, Ansible, Kubernetes, GitOps. Dix ans en production bancaire. Freelance DevOps engineer, Paris / remote.">
 <meta property="og:title" content="Stephen Casse — Ingénieur DevOps freelance">
 <meta property="og:description" content="Automatisons votre delivery. CI/CD, Ansible, Kubernetes, GitOps — dix ans en production bancaire.">
-<meta property="og:image" content="https://ksh2177.github.io/assets/logo-cs-light.png">
-<link rel="icon" href="assets/logo-cs-light.png" type="image/png">
+<meta property="og:image" content="https://ksh2177.github.io/assets/logo-light.png">
+<link rel="icon" href="assets/logo-light.png" type="image/png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap">
 <style>{css}</style>
@@ -181,7 +181,7 @@ def render():
 </head>
 <body>
 <nav><div class="wrap">
-  <a class="brand" href="#"><img class="logo-light" src="assets/logo-cs-light.png" alt="CS Consulting"><img class="logo-dark" src="assets/logo-cs-dark.png" alt="CS Consulting"><span class="mono">ksh2177@cs-consulting:~$</span></a>
+  <a class="brand" href="#"><img class="logo-light" src="assets/logo-light.png" alt="CS Consulting"><img class="logo-dark" src="assets/logo-dark.png" alt="CS Consulting"><span class="mono">ksh2177@cs-consulting:~$</span></a>
   <div class="menu">{nav_links}
     <span class="pill mono" role="group" aria-label="Langue"><button class="pill" data-set-lang="fr" style="border: 0; padding: 0;"><b data-lang="fr">FR</b><span data-lang="en">FR</span></button>·<button class="pill" data-set-lang="en" style="border: 0; padding: 0;"><span data-lang="fr">EN</span><b data-lang="en">EN</b></button></span>
     <button class="pill" data-toggle-theme title="{fr['ui']['theme']} / {en['ui']['theme']}" aria-label="Thème">{icon('sun', 'logo-light', 14)}{icon('moon', 'logo-dark', 14)}</button>
